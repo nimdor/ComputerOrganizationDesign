@@ -1,6 +1,7 @@
 package ir.nimdor.osoolproject;
 
 public class ControlVariables {
+<<<<<<< HEAD
     private int regDest, branch, memRead, memToReg, aluOP, memWrite, aluSrc, regWrite;
 
     public int getRegDest() {
@@ -66,4 +67,6 @@ public class ControlVariables {
     public void setRegWrite(int regWrite) {
         this.regWrite = regWrite;
     }
+=======
+>>>>>>> f456a6306155bc77efb65d4611defd9722ef529e
 }
