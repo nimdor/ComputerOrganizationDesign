@@ -8,7 +8,6 @@ public class NonControlVariables {
     private int rdAddress;
     private int rtAddress;
     private int pc;
-
     public int getPc() {
         return pc;
     }

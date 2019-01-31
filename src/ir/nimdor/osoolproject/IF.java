@@ -1,5 +1,5 @@
 package ir.nimdor.osoolproject;
-
+// DORSA
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -12,7 +12,7 @@ public class IF extends Component {
         this.next = next ;
         pc = get_value ();
         String instruction_string =  get_instruction(pc);
-        int binary_instruction = get_binary_instruction(instruction_string);
+        Instruction instruction = get_binary_instruction(instruction_string);
 
     }
 
@@ -38,8 +38,8 @@ public class IF extends Component {
     }
 
     // translate string instruction to binary instruction  --> instruction memory
-    private int get_binary_instruction ( String instuct ) {
+    private Instruction get_binary_instruction ( String instuct ) {
 
-        return 0 ;
+        return null ;
     }
 }
