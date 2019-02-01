@@ -93,7 +93,7 @@ public class Instruction {
         }
 
 
-        // ------------------------------------------------------- these two depend on indexing of words in memory ! ----------------------------------------
+        //  ------------------------------------------------------- these two depend on indexing of words in memory ! ----------------------------------------
         if (iscommand("lw" , instruct)){
             op = 35 ;
             String subs = instruct.substring(2 + 1 );
