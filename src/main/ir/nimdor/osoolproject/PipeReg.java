@@ -1,4 +1,4 @@
-package ir.nimdor.osoolproject;
+package main.ir.nimdor.osoolproject;
 
 public class PipeReg {
     ControlVariables controlVariables;

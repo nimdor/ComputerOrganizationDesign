@@ -1,6 +1,6 @@
-package ir.nimdor.osoolproject;
+package main.ir.nimdor.osoolproject;
 
-import javax.naming.ldap.Control;
+import main.ir.nimdor.osoolproject.Commands;
 
 //Dorsa
 public class ID extends Component {

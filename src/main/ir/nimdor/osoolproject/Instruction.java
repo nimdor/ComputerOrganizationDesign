@@ -1,4 +1,4 @@
-package ir.nimdor.osoolproject;
+package main.ir.nimdor.osoolproject;
 
 // the instruction in binary format (?!) , saved separately
 public class Instruction {
