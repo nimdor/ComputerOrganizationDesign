@@ -30,16 +30,13 @@ public class IF extends Component {
     // read instruction of the indexed line from the file  --> input line
     private String get_instruction(int pcc) {   // ( done )
         String line ="null";
-    try {
-         line = Files.readAllLines(Paths.get("file.txt")).get(pcc);
+        try {
+            line = Files.readAllLines(Paths.get("file.txt")).get(pcc);
+        } catch (Exception e) {
 
-    }catch (Exception e) {
-
-        e.printStackTrace();
-    }
-        return line ;
-
-
+            e.printStackTrace();
+        }
+        return line;
     }
 
     // translate string instruction to binary instruction  --> instruction memory
