@@ -8,8 +8,6 @@ public class ID extends Component {
     public void run(PipeReg prev , PipeReg next ) {
         this.prev = prev ;
         this.next = next ;
-
-
         instruction = prev.getInstruction() ;
 
         updatememory () ;
@@ -19,6 +17,7 @@ public class ID extends Component {
     }
 
     private void updatememory(){
+
 
     }
     private void updatecontrolvalues(){
