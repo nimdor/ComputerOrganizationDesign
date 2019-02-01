@@ -35,18 +35,51 @@ public class ID extends Component {
     private void updatecontrolvalues(){
 
         ControlVariables controlVariables = new ControlVariables();
-        // set aluop
+        // set controls based on opcode
         if (instruction.getOp() == Commands.Rtype.getValue()) {
             controlVariables.setAluOP(2);
-
+            controlVariables.setRegDest(true);
+            controlVariables.setAluSrc(false);
+            controlVariables.setMemToReg(false);
+            controlVariables.setRegWrite(true);
+            controlVariables.setMemRead(false);
+            controlVariables.setMemWrite(false);
+            controlVariables.setBranch(false);
         }
         else if (instruction.getOp()== Commands.lw.getValue() || instruction.getOp() == Commands.sw.getValue()) {
             controlVariables.setAluOP(0);
+            if (instruction.getOp() == Commands.lw.getValue()) {
+                controlVariables.setRegDest(false);
+                controlVariables.setAluSrc(true);
+                controlVariables.setMemToReg(true);
+                controlVariables.setRegWrite(true);
+                controlVariables.setMemRead(true);
+                controlVariables.setMemWrite(false);
+                controlVariables.setBranch(false);
+            }
+            else {
+                controlVariables.setRegDest(false);// not impo
+                controlVariables.setAluSrc(true);
+                controlVariables.setMemToReg(false); // not impo
+                controlVariables.setRegWrite(false) ;
+                controlVariables.setMemRead(false);
+                controlVariables.setMemWrite(true);
+                controlVariables.setBranch(false);
+
+            }
         }
         else if (instruction.getOp()== Commands.beq.getValue()){
             controlVariables.setAluOP(1);
+            controlVariables.setRegDest(false); // not impo
+            controlVariables.setAluSrc(false);
+            controlVariables.setMemToReg(false); // not impo
+            controlVariables.setRegWrite(false);
+            controlVariables.setMemRead(false);
+            controlVariables.setMemWrite(false);
+            controlVariables.setBranch(true);
         }
 
+        next.setControlVariables(controlVariables);
 
 
     }
