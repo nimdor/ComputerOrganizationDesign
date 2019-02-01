@@ -84,5 +84,11 @@ public class ID extends Component {
 
     }
 
+    public boolean write ( int index , int data , boolean regdst )  {
+        if ( regdst == false ) return false ;
+        memory[index] = data ;
+        return true ;
+    }
+
 
 }

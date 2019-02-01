@@ -17,15 +17,19 @@ public class IF extends Component {
         this.prev =  prev ;
         this.next = next ;
         pc = get_value ();
+
         String instruction_string =  get_instruction(pc);
-        Instruction instruction = get_binary_instruction(instruction_string);
+
+        Instruction instruction = get_binary_insturction(instruction_string);
+        pc += 1 ;
+        next.getNonControlVariables().setPc(pc);
         next.setInstruction(instruction);
     }
 
     // decide the value of pc --> MUX
     public int get_value(){
-        // add a multiplexor here
-        return pc + 1 ;
+        // -------------------------------------- add a multiplexor here -------------------------------------
+        return pc  ;
     }
 
     // read instruction of the indexed line from the file  --> input line
@@ -41,7 +45,7 @@ public class IF extends Component {
     }
 
     // translate string instruction to binary instruction  --> instruction memory
-    private Instruction get_binary_instruction ( String instruct ) { // ( done )
+    private Instruction get_binary_insturction(String instruct ) { // ( done )
         Instruction instruction = new Instruction(instruct);
         return instruction ;
     }
