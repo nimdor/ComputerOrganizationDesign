@@ -1,12 +1,9 @@
 package ir.nimdor.osoolproject;
 
-public class NonControlVariables {
+public class NonControlVariables {// addresses are not used ! the addresses are in the instruction ! }
     private int rs;
     private int rd;
     private int rt;
-    private int rsAddress;
-    private int rdAddress;
-    private int rtAddress;
     private int pc;
     public int getPc() {
         return pc;
@@ -40,27 +37,4 @@ public class NonControlVariables {
         this.rt = rt;
     }
 
-    public int getRsAddress() {
-        return rsAddress;
-    }
-
-    public void setRsAddress(int rsAddress) {
-        this.rsAddress = rsAddress;
-    }
-
-    public int getRdAddress() {
-        return rdAddress;
-    }
-
-    public void setRdAddress(int rdAddress) {
-        this.rdAddress = rdAddress;
-    }
-
-    public int getRtAddress() {
-        return rtAddress;
-    }
-
-    public void setRtAddress(int rtAddress) {
-        this.rtAddress = rtAddress;
-    }
 }

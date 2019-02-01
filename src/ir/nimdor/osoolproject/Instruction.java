@@ -195,4 +195,75 @@ public class Instruction {
         return 0 ;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getOp() {
+        return op;
+    }
+
+    public void setOp(int op) {
+        this.op = op;
+    }
+
+    public int getRs() {
+        return rs;
+    }
+
+    public void setRs(int rs) {
+        this.rs = rs;
+    }
+
+    public int getRt() {
+        return rt;
+    }
+
+    public void setRt(int rt) {
+        this.rt = rt;
+    }
+
+    public int getRd() {
+        return rd;
+    }
+
+    public void setRd(int rd) {
+        this.rd = rd;
+    }
+
+    public int getShamt() {
+        return shamt;
+    }
+
+    public void setShamt(int shamt) {
+        this.shamt = shamt;
+    }
+
+    public int getFunct() {
+        return funct;
+    }
+
+    public void setFunct(int funct) {
+        this.funct = funct;
+    }
+
+    public int getAddress_constant() {
+        return address_constant;
+    }
+
+    public void setAddress_constant(int address_constant) {
+        this.address_constant = address_constant;
+    }
+
+    public int getAddress_field() {
+        return address_field;
+    }
+
+    public void setAddress_field(int address_field) {
+        this.address_field = address_field;
+    }
 }
