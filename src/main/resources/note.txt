@@ -1,0 +1,5 @@
+//memory in id should be registers
+// write should be in commons
+// memory and registers should be out of ID,MEM
+// Component need constructor
+// funct code problem or wrong: used in EX
