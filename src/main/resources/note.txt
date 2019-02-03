@@ -2,4 +2,10 @@
 // write should be in commons
 // memory and registers should be out of ID,MEM
 // Component need constructor
+<<<<<<< HEAD
 // funct code problem or wrong: used in EX
+=======
+// funct code problem or wrong: used in EX
+// all else if should be complete to handle bubble
+// line = Main.class.getResourceAsStream()
+>>>>>>> first commit for ex,mem, wbb

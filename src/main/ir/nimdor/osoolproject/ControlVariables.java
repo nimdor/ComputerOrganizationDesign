@@ -1,4 +1,4 @@
-package main.ir.nimdor.osoolproject;
+package ir.nimdor.osoolproject;
 
 public class ControlVariables {
     private int  aluOP ;

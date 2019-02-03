@@ -1,4 +1,4 @@
-package main.ir.nimdor.osoolproject;
+package ir.nimdor.osoolproject;
 
 public class WB extends Component {
 
@@ -11,10 +11,10 @@ public class WB extends Component {
     @Override
     public void run(PipeReg prev, PipeReg next) {
         if (prev.controlVariables.isMemToReg()){
-            write(prev.nonControlVariables.getRd(), prev.nonControlVariables.getMEMResult(),
+            Commons.writeToReg(memory, prev.nonControlVariables.getRd(), prev.nonControlVariables.getMEMResult(),
                     prev.controlVariables.isRegWrite());
         }else{
-            write(prev.nonControlVariables.getRd(), prev.nonControlVariables.getEXLogicalResult(),
+            Commons.writeToReg(memory, prev.nonControlVariables.getRd(), prev.nonControlVariables.getEXLogicalResult(),
                     prev.controlVariables.isRegWrite());
         }
     }

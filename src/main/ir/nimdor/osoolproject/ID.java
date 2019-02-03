@@ -1,6 +1,5 @@
-package main.ir.nimdor.osoolproject;
+package ir.nimdor.osoolproject;
 
-import main.ir.nimdor.osoolproject.Commands;
 
 //Dorsa
 public class ID extends Component {

@@ -1,4 +1,4 @@
-package main.ir.nimdor.osoolproject;
+package ir.nimdor.osoolproject;
 
 // DORSA
 import java.nio.file.Files;

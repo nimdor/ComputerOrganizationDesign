@@ -1,4 +1,4 @@
-package main.ir.nimdor.osoolproject;
+package ir.nimdor.osoolproject;
 
 
 public class NonControlVariables {// addresses are not used ! the addresses are in the instruction ! }

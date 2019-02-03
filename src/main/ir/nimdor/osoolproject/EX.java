@@ -1,7 +1,9 @@
-package main.ir.nimdor.osoolproject;
+package ir.nimdor.osoolproject;
 
 public class EX extends Component {
 
+    public EX() {
+    }
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
@@ -28,7 +30,7 @@ public class EX extends Component {
         }else if(prev.controlVariables.getAluOP() == 2){
             if(prev.getInstruction().funct == Commands.slt.getValue()){
                 next.nonControlVariables.setEXZeroResult(ALUinp1 - ALUinp2 < 0);
-            }else  if(prev.getInstruction().funct == Commands.beq.getValue()){
+            }else if(prev.getInstruction().funct == Commands.beq.getValue()){
                 next.nonControlVariables.setEXZeroResult(ALUinp1 - ALUinp2 == 0);
             }
         }

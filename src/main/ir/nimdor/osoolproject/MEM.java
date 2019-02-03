@@ -1,7 +1,11 @@
-package main.ir.nimdor.osoolproject;
+package ir.nimdor.osoolproject;
 
 public class MEM extends Component {
-    int[] memory = new int[Configs.MEMORY_SIZE];
+    int[] memory;
+
+    public MEM(int[] memory) {
+        this.memory = memory;
+    }
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
