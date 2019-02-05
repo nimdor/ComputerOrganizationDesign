@@ -13,7 +13,7 @@ public class EX extends Component {
         }else{
             ALUinp2 = prev.getNonControlVariables().getRt();
         }
-        if(prev.controlVariables.getAluOP() == 0){
+        if(prev.controlVariables.getAluOP() == 2){
             if(prev.getInstruction().funct == Commands.add.getValue()){
                 next.nonControlVariables.setEXLogicalResult(ALUinp1 + ALUinp2);
             }else if(prev.getInstruction().funct == Commands.sub.getValue()){
@@ -24,13 +24,13 @@ public class EX extends Component {
                 next.nonControlVariables.setEXLogicalResult(ALUinp1 | ALUinp2);
             }else if(prev.getInstruction().funct == Commands.nor.getValue()){
                 next.nonControlVariables.setEXLogicalResult(~(ALUinp1 | ALUinp2));
-            }
-        }else if(prev.controlVariables.getAluOP() == 1){
-            next.nonControlVariables.setEXLogicalResult(ALUinp1 + ALUinp2);
-        }else if(prev.controlVariables.getAluOP() == 2){
-            if(prev.getInstruction().funct == Commands.slt.getValue()){
+            }else if(prev.getInstruction().funct == Commands.slt.getValue()) {
                 next.nonControlVariables.setEXZeroResult(ALUinp1 - ALUinp2 < 0);
-            }else if(prev.getInstruction().funct == Commands.beq.getValue()){
+            }
+        }else if(prev.controlVariables.getAluOP() == 0){
+            next.nonControlVariables.setEXLogicalResult(ALUinp1 + ALUinp2);
+        }else if(prev.controlVariables.getAluOP() == 1){
+            if(prev.getInstruction().funct == Commands.beq.getValue()){
                 next.nonControlVariables.setEXZeroResult(ALUinp1 - ALUinp2 == 0);
             }
         }

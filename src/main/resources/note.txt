@@ -7,3 +7,6 @@
 // line = Main.class.getResourceAsStream()
 
 // changing name of piperegs in pipe line
+// cleanup pipeline
+// forwarding signal in pipreg+ a register in EX ti cache its result
+// implement shift function
