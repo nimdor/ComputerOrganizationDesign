@@ -5,10 +5,10 @@ package ir.nimdor.osoolproject;
 public class ID extends Component {
     PipeReg prev , next;
     Instruction instruction ;
-    int[] memory  ;
+    int[] registerfile  ;
 
     public ID (){
-        memory = new int[100];
+        registerfile = new int[100];
     }
 
     @Override
@@ -26,9 +26,9 @@ public class ID extends Component {
     private void updatememory(){
 
         NonControlVariables nonvar = next.getNonControlVariables() ;
-        nonvar.setRd(memory[instruction.getRd()]);
-        nonvar.setRs(memory[instruction.getRs()]);
-        nonvar.setRt(memory[instruction.getRt()]);
+        nonvar.setRd(registerfile[instruction.getRd()]);
+        nonvar.setRs(registerfile[instruction.getRs()]);
+        nonvar.setRt(registerfile[instruction.getRt()]);
 
     }
     private void updatecontrolvalues(){
@@ -85,7 +85,7 @@ public class ID extends Component {
 
     public boolean write ( int index , int data , boolean regdst )  {
         if ( regdst == false ) return false ;
-        memory[index] = data ;
+        registerfile[index] = data ;
         return true ;
     }
 
