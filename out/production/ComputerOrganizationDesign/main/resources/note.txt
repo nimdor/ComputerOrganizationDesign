@@ -5,5 +5,3 @@
 // funct code problem or wrong: used in EX
 // all else if should be complete to handle bubble
 // line = Main.class.getResourceAsStream()
-
-// changing name of piperegs in pipe line

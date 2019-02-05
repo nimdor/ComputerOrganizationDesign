@@ -1,14 +1,17 @@
 package ir.nimdor.osoolproject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
+
+import org.junit.*;
 
 public class IFTest {
 
+    PipeLine pipeLine;
+
     @Before
     public void setUp() throws Exception {
-        PipeLine pipeLine = Main.setupPipeLine();
+        int[] registers = new int[Configs.REGISTERS_SIZE];
+        int[] memory = new int[Configs.MEMORY_SIZE];
+        pipeLine = Main.setupPipeLine(registers, memory);
     }
 
     @After
@@ -17,6 +20,8 @@ public class IFTest {
 
     @Test
     public void run() {
+        pipeLine.getIFcomponent().run(pipeLine.getIFReg(), pipeLine.getIDReg());
+        System.err.println(pipeLine.getIFcomponent().pc);
     }
 
     @Test
