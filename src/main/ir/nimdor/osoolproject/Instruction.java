@@ -1,5 +1,7 @@
 package ir.nimdor.osoolproject;
 
+import java.util.ArrayList;
+
 // the instruction in binary format (?!) , saved separately
 public class Instruction {
     int type
@@ -10,9 +12,11 @@ public class Instruction {
             , shamt
             , funct
             ,address_constant
-            , address_field ;
+            , address_field ,
+            offset ; // used for lw and sw
 
-    public Instruction ( String instruct ) {
+    ArrayList<Tag> tags   ;
+    public Instruction ( String instruct , ArrayList<Tag> tgs  ) {
         op = 0 ;
         rs = 0 ;
         rd = 0 ;
@@ -20,6 +24,8 @@ public class Instruction {
         funct = 0 ;
         address_constant = 0 ;
         address_field = 0 ;
+        offset = 0 ;
+        tags= tgs ;
         setup(instruct);
     }
 
@@ -30,7 +36,7 @@ public class Instruction {
             System.out.println(op + rs + rt + rd + shamt + funct );
         }
         else  {
-            System.out.println(op + rs + rt + address_field);
+            System.out.println(op + rs + rt + address_field); // fix this -------------------------------
         }
 
     }
@@ -112,25 +118,33 @@ public class Instruction {
 
             rs = getindex(parts[0]);
             rt = getindex(parts[1]);
+
+            for ( int i = 0 ;i < tags)
             // ----------------------------------------------------- need to fill address feild ! ( how ? ! ) ---------------------------------------------
             return ;
         }
 
 
-        //  ------------------------------------------------------- these two depend on indexing of words in memory ! ----------------------------------------
-        if (iscommand("lw" , instruct)){
+
+        if (iscommand("lw" , instruct)){ // debug !!! in the end
             op = 35 ;
             String subs = instruct.substring(2 + 1 );
             String[] parts = subs.split(",") ;
+            rt = getindex(parts[0]);
+            String[] second_parts = parts[1].split("\\(" ) ;
+            offset = Integer.parseInt(second_parts[0]) ;
+            rs = getindex(second_parts[1])  ;
             return ;
         }
-        if (iscommand("sw", instruct)){
+        if (iscommand("sw", instruct)){  // debug !!!!in the end
             op = 43 ;
 
             String subs = instruct.substring(2 + 1 );
             String[] parts = subs.split(",");
-
-
+            rt = getindex(parts[0]);
+            String[] second_parts = parts[1].split("\\(" ) ;
+            offset = Integer.parseInt(second_parts[0]) ;
+            rs = getindex(second_parts[1])  ;
             return;
 
         }
