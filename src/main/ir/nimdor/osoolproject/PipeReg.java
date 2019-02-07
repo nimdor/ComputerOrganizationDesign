@@ -4,7 +4,7 @@ public class PipeReg {
     ControlVariables controlVariables;
     NonControlVariables nonControlVariables;
     Instruction instruction ;
-
+    boolean pc_control ;
     public ControlVariables getControlVariables() {
         return controlVariables;
     }

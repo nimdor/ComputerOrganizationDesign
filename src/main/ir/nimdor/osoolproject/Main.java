@@ -14,7 +14,7 @@ public class Main {
         PipeReg memPipReg = new PipeReg();
         PipeReg wbPipReg = new PipeReg();
         IF IFinstance = new IF();
-        ID IDinstance = new ID();
+        ID IDinstance = new ID(registers);
         EX EXinstance = new EX();
         MEM MEMinstance = new MEM(memory);
         WB WBinstance = new WB(registers);

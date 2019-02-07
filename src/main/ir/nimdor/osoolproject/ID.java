@@ -1,18 +1,25 @@
 package ir.nimdor.osoolproject;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 //Dorsa
 public class ID extends Component {
     PipeReg prev , next;
     Instruction instruction ;
     int[] registerfile  ;
+    ArrayList<Integer> read_values  ;
 
-    public ID (){
-        registerfile = new int[100];
+    public ID (int []  registerfile){
+        this.registerfile =  registerfile;
     }
 
     @Override
     public void run(PipeReg prev , PipeReg next ) {
+        read_values = new ArrayList<>()  ;
+
         this.prev = prev ;
         this.next = next ;
         instruction = prev.getInstruction() ;
@@ -22,6 +29,20 @@ public class ID extends Component {
         updatememory () ;
         updatecontrolvalues();
     }
+    @Override
+    public void printInfo(){
+        System.out.println("ID information :");
+        System.out.println("read values :" );
+        read_values.forEach(System.out::println);
+        System.out.println("$t0 - $t4 : "  );
+        System.out.println(registerfile[8] + registerfile[9] + registerfile[10] + registerfile[11] + registerfile[12]);
+        System.out.println("ra :" + registerfile[31]);
+        System.out.println("sp : " + registerfile[29]);
+
+
+
+
+    }
 
     private void updatememory(){
 
@@ -29,6 +50,10 @@ public class ID extends Component {
         nonvar.setRd(registerfile[instruction.getRd()]);
         nonvar.setRs(registerfile[instruction.getRs()]);
         nonvar.setRt(registerfile[instruction.getRt()]);
+        read_values.add(nonvar.getRs());
+        read_values.add(nonvar.getRt()) ;
+        read_values.add(nonvar.getRd()) ;
+
 
     }
     private void updatecontrolvalues(){

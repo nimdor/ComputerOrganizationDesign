@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 public class IF extends Component {
     PipeReg prev , next  ;
     int pc  ;
+    String instruction_string ;
+    Instruction instruction
     public IF  ()  {
         pc = 0  ;
         prev = null ;
@@ -18,15 +20,27 @@ public class IF extends Component {
         this.next = next ;
         pc = get_value ();
 
-        String instruction_string =  get_instruction(pc);
+        instruction_string =  get_instruction(pc);
 
-        Instruction instruction = get_binary_insturction(instruction_string);
+        instruction = get_binary_insturction(instruction_string);
         pc += 1 ;
         next.getNonControlVariables().setPc(pc);
         next.setInstruction(instruction);
     }
 
-    // decide the value of pc --> MUX
+    @Override
+    public void printInfo(){
+
+        System.out.println("IF information : ");
+
+        System.out.println("Clock : " + pc ) ;    // starting pc or ending pc ?
+        System.out.println("Instruction : " + instruction.print() );
+
+
+
+    }
+
+    // decide the value of pc --> MUX    ----> from prev
     public int get_value(){
         // -------------------------------------- add a multiplexor here -------------------------------------
         return pc  ;
