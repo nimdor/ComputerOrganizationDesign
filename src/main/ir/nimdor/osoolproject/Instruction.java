@@ -10,10 +10,9 @@ public class Instruction {
             , rt
             , rd
             , shamt
-            , funct
-            ,address_constant
-            , address_field ,
-            offset ; // used for lw and sw
+            , funct,
+
+            offset ; // used for lw  sw beq
 
     ArrayList<Tag> tags   ;
     public Instruction ( String instruct , ArrayList<Tag> tgs  ) {
@@ -22,8 +21,7 @@ public class Instruction {
         rd = 0 ;
         shamt = 0 ;
         funct = 0 ;
-        address_constant = 0 ;
-        address_field = 0 ;
+
         offset = 0 ;
         tags= tgs ;
         setup(instruct);
@@ -36,7 +34,7 @@ public class Instruction {
             System.out.println(op + rs + rt + rd + shamt + funct );
         }
         else  {
-            System.out.println(op + rs + rt + address_field); // fix this -------------------------------
+            System.out.println(op + rs + rt + offset);
         }
 
     }
@@ -110,7 +108,7 @@ public class Instruction {
 
             return;
         }
-        if (iscommand("beq" , instruct)){
+        if (iscommand("beq" , instruct)){//debug
             op = 4 ;
 
             String subs = instruct.substring(3 + 1 );
@@ -119,8 +117,13 @@ public class Instruction {
             rs = getindex(parts[0]);
             rt = getindex(parts[1]);
 
-            for ( int i = 0 ;i < tags)
-            // ----------------------------------------------------- need to fill address feild ! ( how ? ! ) ---------------------------------------------
+            for ( int i = 0 ;i < tags.size() ; i ++ ) {
+                Tag tag = tags.get(i);
+                if ( tag.is_equal(parts[2])){
+                    offset = tag.getIndex() ;
+                    break ;
+                }
+            }
             return ;
         }
 
@@ -287,19 +290,6 @@ public class Instruction {
         this.funct = funct;
     }
 
-    public int getAddress_constant() {
-        return address_constant;
-    }
 
-    public void setAddress_constant(int address_constant) {
-        this.address_constant = address_constant;
-    }
 
-    public int getAddress_field() {
-        return address_field;
-    }
-
-    public void setAddress_field(int address_field) {
-        this.address_field = address_field;
-    }
 }

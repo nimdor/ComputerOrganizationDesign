@@ -19,6 +19,11 @@ public class WB extends Component {
         }
     }
 
+    @Override
+    public void printInfo() {
+
+    }
+
     public boolean write ( int index , int data , boolean regdst )  {
         if ( regdst == false ) return false ;
         memory[index] = data ;

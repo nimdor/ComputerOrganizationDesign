@@ -28,4 +28,11 @@ public class Tag {
     public void setIndex(int index) {
         this.index = index;
     }
+
+
+    public boolean is_equal (String input ){
+        if (s.equals(input))
+            return true ;
+        return false ;
+    }
 }

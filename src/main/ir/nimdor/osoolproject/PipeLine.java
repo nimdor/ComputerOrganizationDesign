@@ -27,6 +27,25 @@ public class PipeLine {
         this.WBcomponent = WBcomponent;
     }
 
+    public boolean run(){
+        try {
+            IFcomponent.run(MEMReg, IFReg);
+            IDcomponent.run(IFReg, IDReg);
+            EXcomponent.run(IDReg, EXReg);
+            MEMcomponent.run(EXReg, MEMReg);
+            WBcomponent.run(MEMReg, WBReg);
+            IFcomponent.printInfo();
+            IDcomponent.printInfo();
+            EXcomponent.printInfo();
+            MEMcomponent.printInfo();
+            WBcomponent.printInfo();
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
+
     public PipeReg getIFReg() {
         return IFReg;
     }

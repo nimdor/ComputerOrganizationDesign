@@ -1,13 +1,25 @@
 package ir.nimdor.osoolproject;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        int[] registers = new int[Configs.REGISTERS_SIZE];
-        int[] memory = new int[Configs.MEMORY_SIZE];
-        PipeLine pipeLine = setupPipeLine(registers, memory);
+        PipeLine pipeLine = setupPipeLine();
+        Scanner input = new Scanner(System.in);
+        int clockNumber = input.nextInt();
+        while(clockNumber > 0){
+            pipeLine = setupPipeLine();
+            while(clockNumber > 0){
+                pipeLine.run();
+                clockNumber--;
+            }
+            clockNumber = input.nextInt();
+        }
     }
 
-    public static PipeLine setupPipeLine(int[] registers, int[] memory){
+    static PipeLine setupPipeLine(){
+        int[] registers = new int[Configs.REGISTERS_SIZE];
+        int[] memory = new int[Configs.MEMORY_SIZE];
         PipeReg ifPipReg = new PipeReg();
         PipeReg idPipReg = new PipeReg();
         PipeReg exPipReg = new PipeReg();
@@ -18,8 +30,7 @@ public class Main {
         EX EXinstance = new EX();
         MEM MEMinstance = new MEM(memory);
         WB WBinstance = new WB(registers);
-        PipeLine pipeLine = new PipeLine(ifPipReg, idPipReg, exPipReg, memPipReg, wbPipReg
-            ,IFinstance, IDinstance, EXinstance, MEMinstance, WBinstance);
-        return pipeLine;
+        return new PipeLine(ifPipReg, idPipReg, exPipReg, memPipReg, wbPipReg
+                ,IFinstance, IDinstance, EXinstance, MEMinstance, WBinstance);
     }
 }
