@@ -13,6 +13,31 @@ public class Instruction {
             , address_field ;
 
     public Instruction ( String instruct ) {
+        op = 0 ;
+        rs = 0 ;
+        rd = 0 ;
+        shamt = 0 ;
+        funct = 0 ;
+        address_constant = 0 ;
+        address_field = 0 ;
+        setup(instruct);
+    }
+
+
+    public void print () {
+
+        if (op == 0 ) {
+            System.out.println(op + rs + rt + rd + shamt + funct );
+        }
+        else  {
+            System.out.println(op + rs + rt + address_field);
+        }
+
+    }
+
+
+    private void setup (String instruct) {
+
         if (iscommand("add" , instruct)){
             op = 0;
             funct = 32 ;
@@ -36,12 +61,11 @@ public class Instruction {
             return;
         }
         if (iscommand("and" , instruct)){
+            funct = 36;
             op = 0 ;
-            funct = 36 ;
 
             String subs = instruct.substring(3 + 1 );
             String[] parts = subs.split(",");
-
             rd = getindex(parts[0]);
             rs = getindex(parts[1]);
             rt = getindex(parts[2]);
@@ -110,9 +134,7 @@ public class Instruction {
             return;
 
         }
-
     }
-
     private boolean iscommand(String command , String inst){
         if ( command.length() > inst.length() ) return false ;
        for ( int i = 0 ;i < (int) command.length() ; i ++ ) {

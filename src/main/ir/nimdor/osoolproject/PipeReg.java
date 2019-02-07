@@ -28,4 +28,8 @@ public class PipeReg {
     public void setInstruction(Instruction instruction) {
         this.instruction = instruction;
     }
+
+    public boolean isPc_control() {
+        return pc_control;
+    }
 }

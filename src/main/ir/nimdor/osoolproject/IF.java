@@ -8,7 +8,7 @@ public class IF extends Component {
     PipeReg prev , next  ;
     int pc  ;
     String instruction_string ;
-    Instruction instruction
+    Instruction instruction;
     public IF  ()  {
         pc = 0  ;
         prev = null ;
@@ -33,8 +33,9 @@ public class IF extends Component {
 
         System.out.println("IF information : ");
 
-        System.out.println("Clock : " + pc ) ;    // starting pc or ending pc ?
-        System.out.println("Instruction : " + instruction.print() );
+        System.out.println("Clock : " + ( pc * 4 )  ) ;    // starting pc or ending pc ?
+        System.out.println("Instruction : "  );
+        instruction.print();
 
 
 
@@ -42,7 +43,9 @@ public class IF extends Component {
 
     // decide the value of pc --> MUX    ----> from prev
     public int get_value(){
-        // -------------------------------------- add a multiplexor here -------------------------------------
+        if ( prev.isPc_control() )
+            pc = prev.getNonControlVariables().getPc() ;
+
         return pc  ;
     }
 
