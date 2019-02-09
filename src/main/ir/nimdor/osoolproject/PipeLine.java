@@ -29,18 +29,23 @@ public class PipeLine {
 
     public boolean run(){
         try {
-            IFcomponent.run(MEMReg, IFReg);
-            IDcomponent.run(IFReg, IDReg);
-            EXcomponent.run(IDReg, EXReg);
-            MEMcomponent.run(EXReg, MEMReg);
+            System.err.println("ho");
             WBcomponent.run(MEMReg, WBReg);
+            MEMcomponent.run(EXReg, MEMReg);
+            EXcomponent.run(IDReg, EXReg);
+            IDcomponent.run(IFReg, IDReg);
+            IFcomponent.run(MEMReg, IFReg);
+            System.out.println("------------------------PROGRAM DATA -----------------------------");
             IFcomponent.printInfo();
             IDcomponent.printInfo();
             EXcomponent.printInfo();
             MEMcomponent.printInfo();
             WBcomponent.printInfo();
+            System.out.println("-----------------------------------------------------");
             return true;
         }catch (Exception e) {
+            System.err.println("WTF?");
+            e.printStackTrace();
             return false;
         }
     }

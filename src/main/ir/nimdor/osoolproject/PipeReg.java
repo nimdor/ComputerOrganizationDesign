@@ -1,10 +1,20 @@
 package ir.nimdor.osoolproject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PipeReg {
-    ControlVariables controlVariables;
-    NonControlVariables nonControlVariables;
-    Instruction instruction ;
+    ControlVariables controlVariables = new ControlVariables();
+    NonControlVariables nonControlVariables = new NonControlVariables();
+    Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{new Tag("stall", 0);}});
     boolean pc_control ;
+
+
+    public void setPc_control(boolean pc_control) {
+        this.pc_control = pc_control;
+    }
     public ControlVariables getControlVariables() {
         return controlVariables;
     }

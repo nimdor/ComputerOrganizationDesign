@@ -9,9 +9,7 @@ public class IFTest {
 
     @Before
     public void setUp() throws Exception {
-        int[] registers = new int[Configs.REGISTERS_SIZE];
-        int[] memory = new int[Configs.MEMORY_SIZE];
-        pipeLine = Main.setupPipeLine(registers, memory);
+        pipeLine = Main.setupPipeLine();
     }
 
     @After

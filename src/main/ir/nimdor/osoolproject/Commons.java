@@ -13,5 +13,6 @@ public class Commons {
         next.setControlVariables(prev.getControlVariables());
         next.setNonControlVariables(prev.getNonControlVariables());
         next.setInstruction(prev.getInstruction());
+        next.setPc_control(prev.isPc_control());
     }
 }

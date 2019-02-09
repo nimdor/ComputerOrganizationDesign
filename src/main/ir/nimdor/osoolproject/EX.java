@@ -11,6 +11,7 @@ public class EX extends Component {
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
+        Commons.forwardPipeReg(prev, next);
         ALUinp1 = ALUinp2 = ALUout = 0;
         ALUzero = false;
         ALUinp1 = prev.getNonControlVariables().getRs();
@@ -31,7 +32,11 @@ public class EX extends Component {
             }else if(prev.getInstruction().funct == Commands.nor.getValue()){
                 ALUout = ~(ALUinp1 | ALUinp2);
             }else if(prev.getInstruction().funct == Commands.slt.getValue()) {
-                ALUzero = (ALUinp1 - ALUinp2 < 0);
+                if(ALUinp1 < ALUinp2) {
+                    ALUout = 1;
+                }else{
+                    ALUout = 0;
+                }
             }
         }else if(prev.controlVariables.getAluOP() == 0){
             ALUout = ALUinp1 + ALUinp2;

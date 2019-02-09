@@ -10,3 +10,6 @@
 // cleanup pipeline
 // forwarding signal in pipreg+ a register in EX ti cache its result
 // implement shift function
+
+// IF -> 109 : out of bound
+// empty instruction in first and end

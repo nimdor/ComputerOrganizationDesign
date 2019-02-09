@@ -9,6 +9,7 @@ public class MEM extends Component {
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
+        Commons.forwardPipeReg(prev, next);
         lastRead = -1;
         if (prev.controlVariables.isMemWrite()){
             memory[prev.nonControlVariables.getRd() + prev.getNonControlVariables().getRt()] =
