@@ -290,6 +290,19 @@ public class Instruction {
         this.funct = funct;
     }
 
+    public int getOffset() {
+        return offset;
+    }
 
+    public void setOffset(int offset) {
+        this.offset = offset;
+    }
 
+    public ArrayList<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<Tag> tags) {
+        this.tags = tags;
+    }
 }

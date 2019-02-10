@@ -14,6 +14,7 @@ public class ID extends Component {
 
     public ID (int []  registerfile){
         this.registerfile =  registerfile;
+
     }
 
     @Override

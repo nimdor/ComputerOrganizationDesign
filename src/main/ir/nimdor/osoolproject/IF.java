@@ -15,6 +15,8 @@ public class IF extends Component {
     String instruction_string ;
     Instruction instruction;
     ArrayList<Tag> tags  ;
+    int stall = 0 ;
+
     public IF  ()  {
         tags = new ArrayList<>() ;
         pc = 0  ;
@@ -32,6 +34,7 @@ public class IF extends Component {
 
         instruction = get_binary_insturction(instruction_string);
         instruction.print();
+        if ()
 
         pc += 1 ;
         next.getNonControlVariables().setPc(pc);
