@@ -53,6 +53,7 @@ public class IF extends Component {
 
         }
         next.setInstruction(instruction);
+        pc +=1 ;
         next.getNonControlVariables().setPc(pc);
 
     }
@@ -62,16 +63,19 @@ public class IF extends Component {
         stall = 3  ;
     }
     void handle(){
-        if ( stall == 0 ){
-            stall_condition = false ;
+        if ( stall == 3 ){
+
             next.setInstruction(pending_instruction);
             pc += 1 ;
             next.getNonControlVariables().setPc( pc );
+            stall -- ;
             return ;
 
         }
         stall -- ;
         next.controlVariables.setStall(true);
+        if ( stall == 0 )
+            stall_condition = false  ;
         return ;
 
     }
