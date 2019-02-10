@@ -24,7 +24,7 @@ public class IF extends Component {
         prev = null ;
         next = null ;
         pending_instruction = null ;
-        stall_condition=false
+        stall_condition=false;
         create_list ();
     }
 
@@ -70,7 +70,7 @@ public class IF extends Component {
 
         }
         stall -- ;
-        next.controlVariables.setStall(True);
+        next.controlVariables.setStall(true);
         return ;
 
     }
