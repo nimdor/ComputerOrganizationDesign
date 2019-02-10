@@ -10,6 +10,7 @@ public class PipeReg {
     NonControlVariables nonControlVariables = new NonControlVariables();
     Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{new Tag("stall", 0);}});
     boolean pc_control ;
+    int MEMcacheRS, MEMcacheRT, EXcacheRS, EXcacheRT, MEMcacheRSval, MEMcacheRTval, EXcacheRSval, EXcacheRTval;
 
 
     public void setPc_control(boolean pc_control) {
