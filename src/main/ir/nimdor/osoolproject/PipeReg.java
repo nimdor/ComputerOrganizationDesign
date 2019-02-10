@@ -6,12 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PipeReg {
-
-    ControlVariables controlVariables = new ControlVariables();
-    NonControlVariables nonControlVariables = new NonControlVariables();
-    Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{new Tag("stall", 0);}});
-    boolean pc_control ;
-    int MEMcacheRS, MEMcacheRT, EXcacheRS, EXcacheRT, MEMcacheRSval, MEMcacheRTval, EXcacheRSval, EXcacheRTval;
+    private ControlVariables controlVariables = new ControlVariables();
+    private NonControlVariables nonControlVariables = new NonControlVariables();
+    private Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{new Tag("stall", 0);}});
+    private boolean pc_control ;
+    private int MEMcacheRD, EXcacheRD, MEMcacheRDval, EXcacheRDval;
 
     public int getMEMcacheRD() {
         return MEMcacheRD;
