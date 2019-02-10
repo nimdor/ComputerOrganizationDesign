@@ -68,4 +68,13 @@ public class ControlVariables {
     public void setRegWrite(boolean regWrite) {
         this.regWrite = regWrite;
     }
+
+
+    public boolean isStall() {
+        return Stall;
+    }
+
+    public void setStall(boolean stall) {
+        Stall = stall;
+    }
 }

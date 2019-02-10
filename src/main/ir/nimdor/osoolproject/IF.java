@@ -13,32 +13,66 @@ public class IF extends Component {
     PipeReg prev , next  ;
     int pc  ;
     String instruction_string ;
-    Instruction instruction;
+    Instruction instruction, pending_instruction  ;
     ArrayList<Tag> tags  ;
     int stall = 0 ;
+    boolean stall_condition  ;
 
     public IF  ()  {
         tags = new ArrayList<>() ;
         pc = 0  ;
         prev = null ;
         next = null ;
+        pending_instruction = null ;
+        stall_condition=false
         create_list ();
     }
+
+
     @Override
     public void run(PipeReg prev , PipeReg next) {
         this.prev =  prev ;
         this.next = next ;
+
+        if ( stall_condition ){
+            handle() ;
+            return ;
+        }
+
         pc = get_value ();
         System.out.println("#pc value : " + pc );
         instruction_string =  get_instruction(pc);
-
         instruction = get_binary_insturction(instruction_string);
         instruction.print();
-        if ()
 
-        pc += 1 ;
-        next.getNonControlVariables().setPc(pc);
+        if (instruction.getOp() == 4 ) {
+            set_stall_condition();
+            run (prev ,next) ;
+            return ;
+
+        }
         next.setInstruction(instruction);
+        next.getNonControlVariables().setPc(pc);
+
+    }
+
+    void set_stall_condition (){
+        stall_condition = true;
+        stall = 3  ;
+    }
+    void handle(){
+        if ( stall == 0 ){
+            stall_condition = false ;
+            next.setInstruction(pending_instruction);
+            pc += 1 ;
+            next.getNonControlVariables().setPc( pc );
+            return ;
+
+        }
+        stall -- ;
+        next.controlVariables.setStall(True);
+        return ;
+
     }
 
     @Override
