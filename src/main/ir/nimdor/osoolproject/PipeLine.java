@@ -35,12 +35,21 @@ public class PipeLine {
             EXcomponent.run(IDReg, EXReg);
             IDcomponent.run(IFReg, IDReg);
             IFcomponent.run(MEMReg, IFReg);
-            System.out.println("------------------------PROGRAM DATA -----------------------------");  // call pipregs too !!!! ###
+            System.out.println("------------------------PROGRAM DATA -----------------------------");
             IFcomponent.printInfo();
             IDcomponent.printInfo();
             EXcomponent.printInfo();
             MEMcomponent.printInfo();
             WBcomponent.printInfo();
+            System.out.println("pipreg information : ");
+            System.out.println("IF/ID" );
+            IFReg.printInfo();
+            System.out.println("ID/EX");
+            IDReg.printInfo();
+            System.out.println("EX/MEM");
+            EXReg.printInfo();
+            System.out.println("MEM/WB");
+            MEMReg.printInfo();
             System.out.println("-----------------------------------------------------");
             return true;
         }catch (Exception e) {

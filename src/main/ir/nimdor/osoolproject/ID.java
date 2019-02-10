@@ -32,11 +32,12 @@ public class ID extends Component {
     }
     @Override
     public void printInfo(){
+        prev.instruction.print();
         System.out.println("ID information :");
         System.out.println("read values :" );
         read_values.forEach(System.out::println);
         System.out.println("$t0 - $t4 : "  );
-        System.out.println(registerfile[8] + registerfile[9] + registerfile[10] + registerfile[11] + registerfile[12]);
+        System.out.println(registerfile[8] + " " + registerfile[9]+ " " + registerfile[10]+ " " + registerfile[11] + " " + registerfile[12]);
         System.out.println("ra :" + registerfile[31]);
         System.out.println("sp : " + registerfile[29]);
 

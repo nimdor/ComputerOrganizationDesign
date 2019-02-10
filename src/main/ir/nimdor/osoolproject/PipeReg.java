@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PipeReg {
+
     ControlVariables controlVariables = new ControlVariables();
     NonControlVariables nonControlVariables = new NonControlVariables();
     Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{new Tag("stall", 0);}});
@@ -42,5 +43,15 @@ public class PipeReg {
 
     public boolean isPc_control() {
         return pc_control;
+    }
+
+    public void printInfo(){
+
+        System.out.println("pipreg noncontrol variables :");
+        System.out.println("RS : "+ nonControlVariables.getRs());
+        System.out.println("RD : " + nonControlVariables.getRd() );
+        System.out.println("RT : " + nonControlVariables.getRt());
+
+
     }
 }
