@@ -25,7 +25,7 @@ public class IF extends Component {
         next = null ;
         pending_instruction = null ;
         stall_condition=false;
-        create_list ();
+        create_list ();   // makes the tags to read ! for beq
     }
 
 
@@ -47,6 +47,7 @@ public class IF extends Component {
 
         if (instruction.getOp() == 4 ) {
             set_stall_condition();
+            pending_instruction = instruction ;
             run (prev ,next) ;
             return ;
 
@@ -86,9 +87,7 @@ public class IF extends Component {
 
 
     }
-    private void create_list ( ){
-
-
+    private void create_list ( ) {
 
 
         // The name of the file to open.
@@ -105,24 +104,23 @@ public class IF extends Component {
             BufferedReader bufferedReader =
                     new BufferedReader(fileReader);
             int index = 0;
-            while((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
 
-                if (line.contains(":")){
-                    tags.add(new Tag(line,index));
+                if (line.contains(":")) {
+                    line = line.substring(0, line.length() - 1); // remove the ":"
+                    tags.add(new Tag(line, index));
                 }
 
-            index ++  ;
+                index++;
             }
 
             // Always close files.
             bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file '" +
                             fileName + "'");
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             System.out.println(
                     "Error reading file '"
                             + fileName + "'");
@@ -133,16 +131,16 @@ public class IF extends Component {
     }
 
     // decide the value of pc --> MUX    ----> from prev
-    public int get_value(){
-        if ( prev.isPc_control() )
-            pc = prev.getNonControlVariables().getPc() ;
+    public int get_value() {
+        if (prev.isPc_control())
+            pc = prev.getNonControlVariables().getPc();
 
-        return pc  ;
+        return pc;
     }
 
     // read instruction of the indexed line from the file  --> input line
     private String get_instruction(int pcc) {   // ( done )
-        String line ="null";
+        String line = "null";
         try {
             line = Files.readAllLines(Paths.get("file.txt")).get(pcc);
         } catch (Exception e) {
@@ -154,8 +152,8 @@ public class IF extends Component {
 
     // translate string instruction to binary instruction  --> instruction memory
     private Instruction get_binary_insturction(String instruct ) { // ( done )
-        Instruction instruction = new Instruction(instruct , tags);
-        return instruction ;
+        Instruction instruction = new Instruction(instruct, tags);
+        return instruction;
     }
 
 

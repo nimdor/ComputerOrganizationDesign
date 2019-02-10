@@ -31,14 +31,22 @@ public class Instruction {
     public void print () {
 
         if (op == 0 ) {
-            System.out.println(op + rs + rt + rd + shamt + funct );
+            System.out.println(bin (op , 6 ) + " " + bin ( rs ,5 ) + " " + bin (rt , 5 ) + " " + bin (rd ,5 )+ " " + bin( shamt , 5) + bin (funct , 6));
         }
         else  {
-            System.out.println(op + rs + rt + offset);
+            System.out.println(bin (op , 6 ) + " " + bin ( rs ,5 ) + " " + bin (rt , 5 ) + " "+ bin (offset , 16));
         }
 
     }
 
+
+    private String bin ( int num , int len )  {
+        String s = Integer.toBinaryString(num);
+        String zeroos = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" ;
+        String finalstring  =  zeroos.substring(0,len - s.length()) + s ;
+        return finalstring;
+
+    }
 
     private void setup (String instruct) {
 
