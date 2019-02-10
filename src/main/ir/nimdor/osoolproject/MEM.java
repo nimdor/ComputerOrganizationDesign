@@ -11,15 +11,19 @@ public class MEM extends Component {
     public void run(PipeReg prev, PipeReg next) {
         Commons.forwardPipeReg(prev, next);
         lastRead = -1;
-        if (prev.controlVariables.isMemWrite()){
-            memory[prev.nonControlVariables.getRd() + prev.getNonControlVariables().getRt()] =
-                    prev.getNonControlVariables().getRs();
-        }else if(prev.controlVariables.isMemRead()){
-            next.nonControlVariables
-                    .setMEMResult(memory[prev.nonControlVariables.getRd() + prev.getNonControlVariables().getRt()]);
-            lastRead = memory[prev.nonControlVariables.getRd() + prev.getNonControlVariables().getRt()];
+        if (prev.getControlVariables().isMemWrite()){
+            memory[prev.getInstruction().getOffset() + prev.getNonControlVariables().getRs()] =
+                    prev.getNonControlVariables().getRt();
+            next.getInstruction().setRd(next.getInstruction().getRt());
+        }else if(prev.getControlVariables().isMemRead()){
+            next.getNonControlVariables()
+                    .setMEMResult(memory[prev.getInstruction().getOffset() + prev.getNonControlVariables().getRs()]);
+            lastRead = memory[prev.getNonControlVariables().getRd() + prev.getNonControlVariables().getRt()];
+            prev.setMEMcacheRD();
+            next.getInstruction().setRd(next.getInstruction().getRt());
         }
-        next.setPc_control(prev.controlVariables.isBranch() & prev.nonControlVariables.getEXZeroResult());
+        next.setPc_control(prev.getControlVariables().isBranch() & prev.getNonControlVariables().getEXZeroResult());
+        next.getNonControlVariables().setPc(prev.getInstruction().getOffset());
     }
 
     @Override

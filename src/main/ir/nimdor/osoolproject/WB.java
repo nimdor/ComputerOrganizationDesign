@@ -10,12 +10,12 @@ public class WB extends Component {
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
-        if (prev.controlVariables.isMemToReg()){
-            Commons.writeToReg(memory, prev.nonControlVariables.getRd(), prev.nonControlVariables.getMEMResult(),
-                    prev.controlVariables.isRegWrite());
+        if (prev.getControlVariables().isMemToReg()){
+            Commons.writeToReg(memory, prev.getInstruction().getRd(), prev.getNonControlVariables().getMEMResult(),
+                    prev.getControlVariables().isRegWrite());
         }else{
-            Commons.writeToReg(memory, prev.nonControlVariables.getRd(), prev.nonControlVariables.getEXLogicalResult(),
-                    prev.controlVariables.isRegWrite());
+            Commons.writeToReg(memory, prev.getNonControlVariables().getRd(), prev.getNonControlVariables().getEXLogicalResult(),
+                    prev.getControlVariables().isRegWrite());
         }
     }
 

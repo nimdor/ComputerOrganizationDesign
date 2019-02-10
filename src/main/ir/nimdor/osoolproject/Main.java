@@ -19,7 +19,9 @@ public class Main {
 
     static PipeLine setupPipeLine(){             //  where is register value setup ?! #
         int[] registers = new int[Configs.REGISTERS_SIZE];
+        registers[29] = 16711680;
         int[] memory = new int[Configs.MEMORY_SIZE];
+        memory[256] = 100;
         PipeReg ifPipReg = new PipeReg();
         PipeReg idPipReg = new PipeReg();
         PipeReg exPipReg = new PipeReg();
