@@ -19,6 +19,7 @@ public class MEM extends Component {
                     .setMEMResult(memory[prev.nonControlVariables.getRd() + prev.getNonControlVariables().getRt()]);
             lastRead = memory[prev.nonControlVariables.getRd() + prev.getNonControlVariables().getRt()];
         }
+        next.setPc_control(prev.controlVariables.isBranch() & prev.nonControlVariables.getEXZeroResult());
     }
 
     @Override
