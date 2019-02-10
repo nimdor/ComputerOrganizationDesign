@@ -35,7 +35,7 @@ public class PipeLine {
             EXcomponent.run(IDReg, EXReg);
             IDcomponent.run(IFReg, IDReg);
             IFcomponent.run(MEMReg, IFReg);
-            System.out.println("------------------------PROGRAM DATA -----------------------------");
+            System.out.println("------------------------PROGRAM DATA -----------------------------");  // call pipregs too !!!! ###
             IFcomponent.printInfo();
             IDcomponent.printInfo();
             EXcomponent.printInfo();

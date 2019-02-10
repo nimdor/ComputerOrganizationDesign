@@ -27,10 +27,12 @@ public class IF extends Component {
         this.prev =  prev ;
         this.next = next ;
         pc = get_value ();
-
+        System.out.println("#pc value : " + pc );
         instruction_string =  get_instruction(pc);
 
         instruction = get_binary_insturction(instruction_string);
+        instruction.print();
+
         pc += 1 ;
         next.getNonControlVariables().setPc(pc);
         next.setInstruction(instruction);
@@ -40,7 +42,6 @@ public class IF extends Component {
     public void printInfo(){
 
         System.out.println("IF information : ");
-
         System.out.println("Clock : " + ( pc * 4 )  ) ;    // starting pc or ending pc ?
         System.out.println("Instruction : "  );
         instruction.print();
