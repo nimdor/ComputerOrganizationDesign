@@ -20,6 +20,7 @@ public class IFTest {
     public void run() {
         pipeLine.getIFcomponent().run(pipeLine.getIFReg(), pipeLine.getIDReg());
         System.err.println(pipeLine.getIFcomponent().pc);
+
     }
 
     @Test
