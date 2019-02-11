@@ -86,6 +86,8 @@ public class IF extends Component {
     public void printInfo() {
 
         System.out.println("IF information : ");
+        //TODO
+//        System.out.println("Clock : " + (pc * 4) + 16);    // starting pc or ending pc ?
         System.out.println("Clock : " + (pc * 4));    // starting pc or ending pc ?
         System.out.println("Instruction : ");
         instruction.print();

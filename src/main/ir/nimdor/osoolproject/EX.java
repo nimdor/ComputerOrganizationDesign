@@ -3,20 +3,27 @@ package ir.nimdor.osoolproject;
 public class EX extends Component {
     private int ALUinp1, ALUinp2, ALUout;
     private boolean ALUzero;
+    private int[] registers;
 
-    public EX() {
+    public EX(int[] registers) {
+        this.registers = registers;
     }
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
         Commons.forwardPipeReg(prev, next);
+        if(next.getMEMcacheRD() != -1){
+            registers[next.getMEMcacheRD()] = next.getMEMcacheRDval();
+        }
+        if(prev.getControlVariables().isStall())
+            return;
         ALUinp1 = ALUinp2 = ALUout = 0;
         ALUzero = false;
-        ALUinp1 = prev.getNonControlVariables().getRs();
+        ALUinp1 = registers[prev.getInstruction().getRs()];
         if (prev.getControlVariables().isAluSrc()) {
-            ALUinp2 = prev.getNonControlVariables().getRd();
+            ALUinp2 = prev.getInstruction().getOffset();
         } else {
-            ALUinp2 = prev.getNonControlVariables().getRt();
+            ALUinp2 = registers[prev.getInstruction().getRt()];
         }
         if (prev.getControlVariables().getAluOP() == 2) {
             if (prev.getInstruction().funct == Commands.add.getValue()) {
@@ -36,6 +43,7 @@ public class EX extends Component {
                     ALUout = 0;
                 }
             }
+            registers[prev.getInstruction().getRd()] = ALUout;
         } else if (prev.getControlVariables().getAluOP() == 0) {
             ALUout = ALUinp1 + ALUinp2;
         } else if (prev.getControlVariables().getAluOP() == 1) {

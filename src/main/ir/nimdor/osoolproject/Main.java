@@ -29,7 +29,7 @@ public class Main {
         PipeReg wbPipReg = new PipeReg();
         IF IFinstance = new IF();
         ID IDinstance = new ID(registers);
-        EX EXinstance = new EX();
+        EX EXinstance = new EX(registers);
         MEM MEMinstance = new MEM(memory);
         WB WBinstance = new WB(registers);
         return new PipeLine(ifPipReg, idPipReg, exPipReg, memPipReg, wbPipReg

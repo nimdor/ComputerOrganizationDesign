@@ -10,7 +10,10 @@ public class MEM extends Component {
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
+        prev.setMEMcacheRD(-1);
         Commons.forwardPipeReg(prev, next);
+        if(prev.getControlVariables().isStall())
+            return;
         lastRead = -1;
         if (prev.getControlVariables().isMemWrite()) {
             memory[prev.getInstruction().getOffset() + prev.getNonControlVariables().getRs()] =
@@ -19,9 +22,10 @@ public class MEM extends Component {
         } else if (prev.getControlVariables().isMemRead()) {
             next.getNonControlVariables()
                     .setMEMResult(memory[prev.getInstruction().getOffset() + prev.getNonControlVariables().getRs()]);
-            lastRead = memory[prev.getNonControlVariables().getRd() + prev.getNonControlVariables().getRt()];
-            //prev.setMEMcacheRD();
+            lastRead = memory[prev.getInstruction().getOffset() + prev.getNonControlVariables().getRs()];
             next.getInstruction().setRd(next.getInstruction().getRt());
+            prev.setMEMcacheRD(prev.getInstruction().getRt());
+            prev.setMEMcacheRDval(lastRead);
         }
         next.setPc_control(prev.getControlVariables().isBranch() & prev.getNonControlVariables().getEXZeroResult());
         next.getNonControlVariables().setPc(prev.getInstruction().getOffset());
