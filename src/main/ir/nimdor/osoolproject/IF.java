@@ -145,7 +145,9 @@ public class IF extends Component {
         try {
             line = Files.readAllLines(Paths.get("file.txt")).get(pcc);
         } catch (Exception e) {
-            e.printStackTrace();
+            stall_condition = true ;
+            stall = 10;
+
         }
         return line;
     }
