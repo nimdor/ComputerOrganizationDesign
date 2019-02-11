@@ -78,8 +78,8 @@ public class IF extends Component {
             stall--;
             return;
         }
-        stall--;
         next.getControlVariables().setStall(true);
+        stall--;
         if (stall == 0) {
             stall_condition = false;
         }

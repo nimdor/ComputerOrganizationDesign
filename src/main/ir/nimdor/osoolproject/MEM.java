@@ -14,6 +14,8 @@ public class MEM extends Component {
         prev.setMEMcacheRD(-1);
         Commons.forwardPipeReg(prev, next);
         instruction = prev.getInstruction();
+        next.setPc_control(prev.getControlVariables().isBranch() & prev.getNonControlVariables().getEXZeroResult());
+        next.getNonControlVariables().setPc(prev.getInstruction().getOffset());
         if (prev.getControlVariables().isStall())
             return;
         lastRead = -1;
@@ -29,8 +31,6 @@ public class MEM extends Component {
             prev.setMEMcacheRD(prev.getInstruction().getRt());
             prev.setMEMcacheRDval(lastRead);
         }
-        next.setPc_control(prev.getControlVariables().isBranch() & prev.getNonControlVariables().getEXZeroResult());
-        next.getNonControlVariables().setPc(prev.getInstruction().getOffset());
     }
 
     @Override
