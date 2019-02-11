@@ -2,11 +2,11 @@ package ir.nimdor.osoolproject;
 
 public class WB extends Component {
 
-    int[] memory;
+    int[] registers;
     private Instruction instruction;
 
-    public WB(int[] memory) {
-        this.memory = memory;
+    public WB(int[] registers) {
+        this.registers = registers;
     }
 
     @Override
@@ -15,10 +15,11 @@ public class WB extends Component {
         if (prev.getControlVariables().isStall())
             return;
         if (prev.getControlVariables().isMemToReg()) {
-            Commons.writeToReg(memory, prev.getInstruction().getRd(), prev.getNonControlVariables().getMEMResult(),
+            Commons.writeToReg(registers, prev.getInstruction().getRd(), prev.getNonControlVariables().getMEMResult(),
                     prev.getControlVariables().isRegWrite());
         } else {
-            Commons.writeToReg(memory, prev.getNonControlVariables().getRd(), prev.getNonControlVariables().getEXLogicalResult(),
+            Commons.writeToReg(registers, prev.getInstruction().getRd(),
+                    prev.getNonControlVariables().getEXLogicalResult(),
                     prev.getControlVariables().isRegWrite());
         }
     }
@@ -27,11 +28,5 @@ public class WB extends Component {
     public void printInfo() {
         System.out.print("WB information: ");
         instruction.print();
-    }
-
-    public boolean write(int index, int data, boolean regdst) {
-        if (regdst == false) return false;
-        memory[index] = data;
-        return true;
     }
 }

@@ -166,13 +166,10 @@ public class Instruction {
     private int getindex(String s) { // (done)
         String str = s.substring(1); // remove $ sign
         switch (str) {
-
             case "zero":
                 return 0;
-
             case "v0":
                 return 2;
-
             case "v1":
                 return 3;
             case "a0":
@@ -227,10 +224,7 @@ public class Instruction {
                 return 30;
             case "ra":
                 return 31;
-
         }
-
-
         return 0;
     }
 

@@ -41,14 +41,14 @@ public class ID extends Component {
     }
 
     private void updatememory(PipeReg next) {
-
-        NonControlVariables nonvar = next.getNonControlVariables();
+        NonControlVariables nonvar = new NonControlVariables();
         nonvar.setRd(registerfile[instruction.getRd()]);
         nonvar.setRs(registerfile[instruction.getRs()]);
         nonvar.setRt(registerfile[instruction.getRt()]);
         read_values.add(nonvar.getRs());
         read_values.add(nonvar.getRt());
         read_values.add(nonvar.getRd());
+        next.setNonControlVariables(nonvar);
     }
 
     private void updatecontrolvalues(PipeReg next) {

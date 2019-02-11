@@ -5,11 +5,9 @@ import java.util.ArrayList;
 public class PipeReg {
     private ControlVariables controlVariables = new ControlVariables();
     private NonControlVariables nonControlVariables = new NonControlVariables();
-    private Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{
-        new Tag("stall", 0);
-    }});
+    private Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{}});
     private boolean pc_control;
-    private int MEMcacheRD, EXcacheRD, MEMcacheRDval, EXcacheRDval;
+    private int MEMcacheRD, MEMcacheRDval;
 
     public int getMEMcacheRD() {
         return MEMcacheRD;
@@ -19,28 +17,12 @@ public class PipeReg {
         this.MEMcacheRD = MEMcacheRD;
     }
 
-    public int getEXcacheRD() {
-        return EXcacheRD;
-    }
-
-    public void setEXcacheRD(int EXcacheRD) {
-        this.EXcacheRD = EXcacheRD;
-    }
-
     public int getMEMcacheRDval() {
         return MEMcacheRDval;
     }
 
     public void setMEMcacheRDval(int MEMcacheRDval) {
         this.MEMcacheRDval = MEMcacheRDval;
-    }
-
-    public int getEXcacheRDval() {
-        return EXcacheRDval;
-    }
-
-    public void setEXcacheRDval(int EXcacheRDval) {
-        this.EXcacheRDval = EXcacheRDval;
     }
 
     public ControlVariables getControlVariables() {

@@ -66,33 +66,27 @@ public class IF extends Component {
 
     void handle() {
         if (stall == 3) {
-
             next.setInstruction(pending_instruction);
             pc += 1;
             next.getNonControlVariables().setPc(pc);
             stall--;
             return;
-
         }
         stall--;
         next.getControlVariables().setStall(true);
         if (stall == 0)
             stall_condition = false;
         return;
-
     }
 
     @Override
     public void printInfo() {
-
         System.out.print("IF information: ");
         instruction.print();
 //        System.out.println("Instruction : ");
         //TODO
 //        System.out.println("Clock : " + (pc * 4) + 16);    // starting pc or ending pc ?
-        System.out.println("PC : " + (pc * 4));    // starting pc or ending pc ?
-
-
+        System.out.println("PC: " + ((pc * 4)+16) + "clock: " + pc);    // starting pc or ending pc ?
     }
 
     private void create_list() {
@@ -135,7 +129,6 @@ public class IF extends Component {
             // Or we could just do this:
             // ex.printStackTrace();
         }
-
     }
 
     // decide the value of pc --> MUX    ----> from prev
@@ -152,7 +145,6 @@ public class IF extends Component {
         try {
             line = Files.readAllLines(Paths.get("file.txt")).get(pcc);
         } catch (Exception e) {
-
             e.printStackTrace();
         }
         return line;
