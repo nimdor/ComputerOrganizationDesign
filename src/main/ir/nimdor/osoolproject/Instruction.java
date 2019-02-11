@@ -26,7 +26,7 @@ public class Instruction {
     public void print() {
 
         if (op == 0) {
-            System.out.print(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(rd, 5) + " " + bin(shamt, 5) + bin(funct, 6));
+            System.out.print(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(rd, 5) + " " + bin(shamt, 5) + " "    + bin(funct, 6));
         } else {
             System.out.print(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(offset, 16));
         }

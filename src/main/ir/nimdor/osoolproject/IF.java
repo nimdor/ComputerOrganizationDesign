@@ -67,11 +67,11 @@ public class IF extends Component {
     void set_stall_condition() {
 
         stall_condition = true;
-        stall = 3;
+        stall = 4;
     }
 
     void handle() {
-        if (stall == 3) {
+        if (stall == 4) {
             next.setInstruction(pending_instruction);
             pc += 1;
             next.getNonControlVariables().setPc(pc);
