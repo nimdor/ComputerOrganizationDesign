@@ -148,7 +148,8 @@ public class IF extends Component {
         } catch (Exception e) {
             System.out.println("EXCEPT CONDITION HAPPENED ! ");
             stall_condition = true ;
-            stall = 10;
+            stall = 100;
+            run(prev,next);
 
         }
         return line;
