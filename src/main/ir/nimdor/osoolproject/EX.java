@@ -4,6 +4,7 @@ public class EX extends Component {
     private int ALUinp1, ALUinp2, ALUout;
     private boolean ALUzero;
     private int[] registers;
+    private Instruction instruction;
 
     public EX(int[] registers) {
         this.registers = registers;
@@ -12,10 +13,11 @@ public class EX extends Component {
     @Override
     public void run(PipeReg prev, PipeReg next) {
         Commons.forwardPipeReg(prev, next);
-        if(next.getMEMcacheRD() != -1){
+        instruction = prev.getInstruction();
+        if (next.getMEMcacheRD() != -1) {
             registers[next.getMEMcacheRD()] = next.getMEMcacheRDval();
         }
-        if(prev.getControlVariables().isStall())
+        if (prev.getControlVariables().isStall())
             return;
         ALUinp1 = ALUinp2 = ALUout = 0;
         ALUzero = false;
@@ -57,8 +59,8 @@ public class EX extends Component {
 
     @Override
     public void printInfo() {
-        System.out.println("Main ALU input: " + ALUinp1 + " " + ALUinp2);
-        System.out.println("Main ALU output: " + ALUout + " zero: " + ALUzero);
-
+        System.out.print("EX information: ");
+        instruction.print();
+        System.out.println("Main ALU: input:" + ALUinp1 + " " + ALUinp2 + " output: " + ALUout + " zero: " + ALUzero);
     }
 }

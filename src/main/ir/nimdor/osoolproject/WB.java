@@ -3,6 +3,7 @@ package ir.nimdor.osoolproject;
 public class WB extends Component {
 
     int[] memory;
+    private Instruction instruction;
 
     public WB(int[] memory) {
         this.memory = memory;
@@ -10,7 +11,8 @@ public class WB extends Component {
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
-        if(prev.getControlVariables().isStall())
+        instruction = prev.getInstruction();
+        if (prev.getControlVariables().isStall())
             return;
         if (prev.getControlVariables().isMemToReg()) {
             Commons.writeToReg(memory, prev.getInstruction().getRd(), prev.getNonControlVariables().getMEMResult(),
@@ -23,7 +25,8 @@ public class WB extends Component {
 
     @Override
     public void printInfo() {
-
+        System.out.print("WB information: ");
+        instruction.print();
     }
 
     public boolean write(int index, int data, boolean regdst) {

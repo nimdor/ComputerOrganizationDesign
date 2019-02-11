@@ -5,45 +5,42 @@ import java.util.ArrayList;
 
 //Dorsa
 public class ID extends Component {
-    PipeReg prev, next;
-    Instruction instruction;
-    int[] registerfile;
-    ArrayList<Integer> read_values;
+    private Instruction instruction;
+    private int[] registerfile;
+    private ArrayList<Integer> read_values;
 
     public ID(int[] registerfile) {
         this.registerfile = registerfile;
-
     }
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
         read_values = new ArrayList<>();
-
-        this.prev = prev;
-        this.next = next;
         instruction = prev.getInstruction();
+        if (prev.getControlVariables().isStall())
+            return;
         next.setInstruction(instruction);
         next.getNonControlVariables().setPc(prev.getNonControlVariables().getPc());
 
-        updatememory();
-        updatecontrolvalues();
+        updatememory(next);
+        updatecontrolvalues(next);
     }
 
     @Override
     public void printInfo() {
-        prev.getInstruction().print();
-        System.out.println("ID information :");
-        System.out.println("read values :");
-        read_values.forEach(System.out::println);
-        System.out.println("$t0 - $t4 : ");
-        System.out.println(registerfile[8] + " " + registerfile[9] + " " + registerfile[10] + " " + registerfile[11] + " " + registerfile[12]);
-        System.out.println("ra :" + registerfile[31]);
-        System.out.println("sp : " + registerfile[29]);
-
-
+        System.out.print("ID information: ");
+        instruction.print();
+        System.out.print("read values:");
+        read_values.forEach((n) -> System.out.print(" " + n));
+        System.out.println();
+        System.out.print("$t0 - $t4 : ");
+        System.out.print(registerfile[8] + " " + registerfile[9] + " " + registerfile[10] + " " +
+                registerfile[11] + " " + registerfile[12]);
+        System.out.print("  ra :" + registerfile[31]);
+        System.out.println("  sp : " + registerfile[29]);
     }
 
-    private void updatememory() {
+    private void updatememory(PipeReg next) {
 
         NonControlVariables nonvar = next.getNonControlVariables();
         nonvar.setRd(registerfile[instruction.getRd()]);
@@ -54,7 +51,7 @@ public class ID extends Component {
         read_values.add(nonvar.getRd());
     }
 
-    private void updatecontrolvalues() {
+    private void updatecontrolvalues(PipeReg next) {
 
         ControlVariables controlVariables = new ControlVariables();
         // set controls based on opcode
@@ -97,17 +94,6 @@ public class ID extends Component {
             controlVariables.setMemWrite(false);
             controlVariables.setBranch(true);
         }
-
         next.setControlVariables(controlVariables);
-
-
     }
-
-    public boolean write(int index, int data, boolean regdst) {
-        if (regdst == false) return false;
-        registerfile[index] = data;
-        return true;
-    }
-
-
 }

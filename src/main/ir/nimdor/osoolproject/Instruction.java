@@ -5,8 +5,8 @@ import java.util.ArrayList;
 // the instruction in binary format (?!) , saved separately
 public class Instruction {
     int type, op, rs, rt, rd, shamt, funct,
-
-    offset; // used for lw  sw beq
+            offset; // used for lw  sw beq
+    String instruct;
 
     ArrayList<Tag> tags;
 
@@ -16,7 +16,7 @@ public class Instruction {
         rd = 0;
         shamt = 0;
         funct = 0;
-
+        this.instruct = instruct;
         offset = 0;
         tags = tgs;
         setup(instruct);
@@ -26,11 +26,11 @@ public class Instruction {
     public void print() {
 
         if (op == 0) {
-            System.out.println(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(rd, 5) + " " + bin(shamt, 5) + bin(funct, 6));
+            System.out.print(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(rd, 5) + " " + bin(shamt, 5) + bin(funct, 6));
         } else {
-            System.out.println(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(offset, 16));
+            System.out.print(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(offset, 16));
         }
-
+        System.out.println("   " + instruct);
     }
 
 

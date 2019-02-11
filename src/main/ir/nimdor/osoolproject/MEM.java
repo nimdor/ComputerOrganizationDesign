@@ -2,6 +2,7 @@ package ir.nimdor.osoolproject;
 
 public class MEM extends Component {
     int[] memory;
+    Instruction instruction;
     private int lastRead;
 
     public MEM(int[] memory) {
@@ -12,7 +13,8 @@ public class MEM extends Component {
     public void run(PipeReg prev, PipeReg next) {
         prev.setMEMcacheRD(-1);
         Commons.forwardPipeReg(prev, next);
-        if(prev.getControlVariables().isStall())
+        instruction = prev.getInstruction();
+        if (prev.getControlVariables().isStall())
             return;
         lastRead = -1;
         if (prev.getControlVariables().isMemWrite()) {
@@ -33,6 +35,8 @@ public class MEM extends Component {
 
     @Override
     public void printInfo() {
+        System.out.print("MEM information :");
+        instruction.print();
         System.out.println("Last thing read from memory: " + lastRead);
     }
 }

@@ -77,10 +77,20 @@ public class PipeReg {
 
     public void printInfo() {
 
-        System.out.println("pipreg noncontrol variables :");
-        System.out.println("RS : " + nonControlVariables.getRs());
-        System.out.println("RD : " + nonControlVariables.getRd());
-        System.out.println("RT : " + nonControlVariables.getRt());
+        System.out.print("pipereg vars:");
+        System.out.print(" RS:" + nonControlVariables.getRs());
+        System.out.print(" RD:" + nonControlVariables.getRd());
+        System.out.print(" RT:" + nonControlVariables.getRt());
+        System.out.print(" // regDest:" + controlVariables.isRegDest());
+        System.out.print(" branch:" + controlVariables.isBranch());
+        System.out.print(" memRead:" + controlVariables.isMemRead());
+        System.out.print(" memToReg:" + controlVariables.isMemToReg());
+        System.out.print(" memWrite:" + controlVariables.isMemWrite());
+        System.out.print(" aluSrc:" + controlVariables.isAluSrc());
+        System.out.print(" regWrite:" + controlVariables.isRegWrite());
+        System.out.print(" stall:" + controlVariables.isStall());
+        System.out.print(" aluOP:" + controlVariables.getAluOP());
+        System.out.println();
 
 
     }

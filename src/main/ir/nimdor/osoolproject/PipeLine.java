@@ -29,7 +29,7 @@ public class PipeLine {
 
     public boolean run() {
         try {
-            System.err.println("ho");
+//            System.err.println("ho");
             WBcomponent.run(MEMReg, WBReg);
             MEMcomponent.run(EXReg, MEMReg);
             EXcomponent.run(IDReg, EXReg);
@@ -37,19 +37,23 @@ public class PipeLine {
             IFcomponent.run(MEMReg, IFReg);
             System.out.println("------------------------PROGRAM DATA -----------------------------");
             IFcomponent.printInfo();
-            IDcomponent.printInfo();
-            EXcomponent.printInfo();
-            MEMcomponent.printInfo();
-            WBcomponent.printInfo();
-            System.out.println("pipreg information : ");
-            System.out.println("IF/ID");
+//            System.out.println("IF/ID");
             IFReg.printInfo();
-            System.out.println("ID/EX");
+
+            IDcomponent.printInfo();
+//            System.out.println("ID/EX");
             IDReg.printInfo();
-            System.out.println("EX/MEM");
+
+            EXcomponent.printInfo();
+//            System.out.println("EX/MEM");
             EXReg.printInfo();
-            System.out.println("MEM/WB");
+
+            MEMcomponent.printInfo();
+//            System.out.println("MEM/WB");
             MEMReg.printInfo();
+
+            WBcomponent.printInfo();
+
             System.out.println("-----------------------------------------------------");
             return true;
         } catch (Exception e) {

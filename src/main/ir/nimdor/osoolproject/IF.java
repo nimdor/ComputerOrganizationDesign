@@ -41,10 +41,10 @@ public class IF extends Component {
         }
 
         pc = get_value();
-        System.out.println("#pc value : " + pc);
+        //System.out.println("#pc value : " + pc);
         instruction_string = get_instruction(pc);
         instruction = get_binary_insturction(instruction_string);
-        instruction.print();
+        //instruction.print();
 
         if (instruction.getOp() == 4) {
             set_stall_condition();
@@ -85,12 +85,12 @@ public class IF extends Component {
     @Override
     public void printInfo() {
 
-        System.out.println("IF information : ");
+        System.out.print("IF information: ");
+        instruction.print();
+//        System.out.println("Instruction : ");
         //TODO
 //        System.out.println("Clock : " + (pc * 4) + 16);    // starting pc or ending pc ?
-        System.out.println("Clock : " + (pc * 4));    // starting pc or ending pc ?
-        System.out.println("Instruction : ");
-        instruction.print();
+        System.out.println("PC : " + (pc * 4));    // starting pc or ending pc ?
 
 
     }
