@@ -19,6 +19,7 @@ public class Main {
 
     static PipeLine setupPipeLine() {             //  where is register value setup ?! #
         int[] registers = new int[Configs.REGISTERS_SIZE];
+        int[] tempregisters = new int[Configs.REGISTERS_SIZE];
         registers[29] = 16711680;
         int[] memory = new int[Configs.MEMORY_SIZE];
         memory[256] = 100;
@@ -29,7 +30,7 @@ public class Main {
         PipeReg wbPipReg = new PipeReg();
         IF IFinstance = new IF();
         ID IDinstance = new ID(registers);
-        EX EXinstance = new EX(registers);
+        EX EXinstance = new EX(tempregisters);
         MEM MEMinstance = new MEM(memory);
         WB WBinstance = new WB(registers);
         return new PipeLine(ifPipReg, idPipReg, exPipReg, memPipReg, wbPipReg
