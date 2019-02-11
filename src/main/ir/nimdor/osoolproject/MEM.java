@@ -3,6 +3,7 @@ package ir.nimdor.osoolproject;
 public class MEM extends Component {
     int[] memory;
     private int lastRead;
+
     public MEM(int[] memory) {
         this.memory = memory;
     }
@@ -11,15 +12,15 @@ public class MEM extends Component {
     public void run(PipeReg prev, PipeReg next) {
         Commons.forwardPipeReg(prev, next);
         lastRead = -1;
-        if (prev.getControlVariables().isMemWrite()){
+        if (prev.getControlVariables().isMemWrite()) {
             memory[prev.getInstruction().getOffset() + prev.getNonControlVariables().getRs()] =
                     prev.getNonControlVariables().getRt();
             next.getInstruction().setRd(next.getInstruction().getRt());
-        }else if(prev.getControlVariables().isMemRead()){
+        } else if (prev.getControlVariables().isMemRead()) {
             next.getNonControlVariables()
                     .setMEMResult(memory[prev.getInstruction().getOffset() + prev.getNonControlVariables().getRs()]);
             lastRead = memory[prev.getNonControlVariables().getRd() + prev.getNonControlVariables().getRt()];
-            prev.setMEMcacheRD();
+            //prev.setMEMcacheRD();
             next.getInstruction().setRd(next.getInstruction().getRt());
         }
         next.setPc_control(prev.getControlVariables().isBranch() & prev.getNonControlVariables().getEXZeroResult());

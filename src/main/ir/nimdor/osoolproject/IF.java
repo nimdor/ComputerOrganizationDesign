@@ -1,6 +1,7 @@
 package ir.nimdor.osoolproject;
 
 // DORSA
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,88 +11,89 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class IF extends Component {
-    PipeReg prev , next  ;
-    int pc  ;
-    String instruction_string ;
-    Instruction instruction, pending_instruction  ;
-    ArrayList<Tag> tags  ;
-    int stall = 0 ;
-    boolean stall_condition  ;
+    PipeReg prev, next;
+    int pc;
+    String instruction_string;
+    Instruction instruction, pending_instruction;
+    ArrayList<Tag> tags;
+    int stall = 0;
+    boolean stall_condition;
 
-    public IF  ()  {
-        tags = new ArrayList<>() ;
-        pc = 0  ;
-        prev = null ;
-        next = null ;
-        pending_instruction = null ;
-        stall_condition=false;
-        create_list ();   // makes the tags to read ! for beq
+    public IF() {
+        tags = new ArrayList<>();
+        pc = 0;
+        prev = null;
+        next = null;
+        pending_instruction = null;
+        stall_condition = false;
+        create_list();   // makes the tags to read ! for beq
     }
 
 
     @Override
-    public void run(PipeReg prev , PipeReg next) {
-        this.prev =  prev ;
-        this.next = next ;
+    public void run(PipeReg prev, PipeReg next) {
+        this.prev = prev;
+        this.next = next;
 
-        if ( stall_condition ){
-            handle() ;
-            return ;
+        if (stall_condition) {
+            handle();
+            return;
         }
 
-        pc = get_value ();
-        System.out.println("#pc value : " + pc );
-        instruction_string =  get_instruction(pc);
+        pc = get_value();
+        System.out.println("#pc value : " + pc);
+        instruction_string = get_instruction(pc);
         instruction = get_binary_insturction(instruction_string);
         instruction.print();
 
-        if (instruction.getOp() == 4 ) {
+        if (instruction.getOp() == 4) {
             set_stall_condition();
-            pending_instruction = instruction ;
-            run (prev ,next) ;
-            return ;
+            pending_instruction = instruction;
+            run(prev, next);
+            return;
 
         }
         next.setInstruction(instruction);
-        pc +=1 ;
+        pc += 1;
         next.getNonControlVariables().setPc(pc);
 
     }
 
-    void set_stall_condition (){
+    void set_stall_condition() {
         stall_condition = true;
-        stall = 3  ;
+        stall = 3;
     }
-    void handle(){
-        if ( stall == 3 ){
+
+    void handle() {
+        if (stall == 3) {
 
             next.setInstruction(pending_instruction);
-            pc += 1 ;
-            next.getNonControlVariables().setPc( pc );
-            stall -- ;
-            return ;
+            pc += 1;
+            next.getNonControlVariables().setPc(pc);
+            stall--;
+            return;
 
         }
-        stall -- ;
-        next.controlVariables.setStall(true);
-        if ( stall == 0 )
-            stall_condition = false  ;
-        return ;
+        stall--;
+        next.getControlVariables().setStall(true);
+        if (stall == 0)
+            stall_condition = false;
+        return;
 
     }
 
     @Override
-    public void printInfo(){
+    public void printInfo() {
 
         System.out.println("IF information : ");
-        System.out.println("Clock : " + ( pc * 4 )  ) ;    // starting pc or ending pc ?
-        System.out.println("Instruction : "  );
+        System.out.println("Clock : " + (pc * 4));    // starting pc or ending pc ?
+        System.out.println("Instruction : ");
         instruction.print();
 
 
-
     }
-    private void create_list ( ) {
+
+    private void create_list() {
 
 
         // The name of the file to open.
@@ -155,11 +157,10 @@ public class IF extends Component {
     }
 
     // translate string instruction to binary instruction  --> instruction memory
-    private Instruction get_binary_insturction(String instruct ) { // ( done )
+    private Instruction get_binary_insturction(String instruct) { // ( done )
         Instruction instruction = new Instruction(instruct, tags);
         return instruction;
     }
-
 
 
 }

@@ -1,7 +1,5 @@
 package ir.nimdor.osoolproject;
 
-import java.util.ArrayList;
-
 public class EX extends Component {
     private int ALUinp1, ALUinp2, ALUout;
     private boolean ALUzero;
@@ -15,38 +13,38 @@ public class EX extends Component {
         ALUinp1 = ALUinp2 = ALUout = 0;
         ALUzero = false;
         ALUinp1 = prev.getNonControlVariables().getRs();
-        if(prev.getControlVariables().isAluSrc()){
+        if (prev.getControlVariables().isAluSrc()) {
             ALUinp2 = prev.getNonControlVariables().getRd();
-        }else{
+        } else {
             ALUinp2 = prev.getNonControlVariables().getRt();
         }
-        if(prev.controlVariables.getAluOP() == 2){
-            if(prev.getInstruction().funct == Commands.add.getValue()){
+        if (prev.getControlVariables().getAluOP() == 2) {
+            if (prev.getInstruction().funct == Commands.add.getValue()) {
                 ALUout = ALUinp1 + ALUinp2;
-            }else if(prev.getInstruction().funct == Commands.sub.getValue()){
+            } else if (prev.getInstruction().funct == Commands.sub.getValue()) {
                 ALUout = ALUinp1 - ALUinp2;
-            }else if(prev.getInstruction().funct == Commands.and.getValue()){
+            } else if (prev.getInstruction().funct == Commands.and.getValue()) {
                 ALUout = ALUinp1 & ALUinp2;
-            }else if(prev.getInstruction().funct == Commands.or.getValue()){
+            } else if (prev.getInstruction().funct == Commands.or.getValue()) {
                 ALUout = ALUinp1 | ALUinp2;
-            }else if(prev.getInstruction().funct == Commands.nor.getValue()){
+            } else if (prev.getInstruction().funct == Commands.nor.getValue()) {
                 ALUout = ~(ALUinp1 | ALUinp2);
-            }else if(prev.getInstruction().funct == Commands.slt.getValue()) {
-                if(ALUinp1 < ALUinp2) {
+            } else if (prev.getInstruction().funct == Commands.slt.getValue()) {
+                if (ALUinp1 < ALUinp2) {
                     ALUout = 1;
-                }else{
+                } else {
                     ALUout = 0;
                 }
             }
-        }else if(prev.controlVariables.getAluOP() == 0){
+        } else if (prev.getControlVariables().getAluOP() == 0) {
             ALUout = ALUinp1 + ALUinp2;
-        }else if(prev.controlVariables.getAluOP() == 1){
-            if(prev.getInstruction().funct == Commands.beq.getValue()){
+        } else if (prev.getControlVariables().getAluOP() == 1) {
+            if (prev.getInstruction().funct == Commands.beq.getValue()) {
                 ALUzero = (ALUinp1 - ALUinp2 == 0);
             }
         }
-        next.nonControlVariables.setEXLogicalResult(ALUout);
-        next.nonControlVariables.setEXZeroResult(ALUzero);
+        next.getNonControlVariables().setEXLogicalResult(ALUout);
+        next.getNonControlVariables().setEXZeroResult(ALUzero);
     }
 
     @Override

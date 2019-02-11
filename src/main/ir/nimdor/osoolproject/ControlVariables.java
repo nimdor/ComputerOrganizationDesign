@@ -1,8 +1,8 @@
 package ir.nimdor.osoolproject;
 
 public class ControlVariables {
-    private int  aluOP ;
-    private boolean regDest, branch, memRead, memToReg, memWrite, aluSrc, regWrite,Stall;
+    private int aluOP;
+    private boolean regDest, branch, memRead, memToReg, memWrite, aluSrc, regWrite, Stall;
 
 
     public int getAluOP() {

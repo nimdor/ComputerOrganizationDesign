@@ -7,9 +7,9 @@ public class Main {
         PipeLine pipeLine = setupPipeLine();
         Scanner input = new Scanner(System.in);
         int clockNumber = input.nextInt();
-        while(clockNumber > 0){
+        while (clockNumber > 0) {
             pipeLine = setupPipeLine();
-            while(clockNumber > 0){
+            while (clockNumber > 0) {
                 pipeLine.run();
                 clockNumber--;
             }
@@ -17,7 +17,7 @@ public class Main {
         }
     }
 
-    static PipeLine setupPipeLine(){             //  where is register value setup ?! #
+    static PipeLine setupPipeLine() {             //  where is register value setup ?! #
         int[] registers = new int[Configs.REGISTERS_SIZE];
         registers[29] = 16711680;
         int[] memory = new int[Configs.MEMORY_SIZE];
@@ -33,6 +33,6 @@ public class Main {
         MEM MEMinstance = new MEM(memory);
         WB WBinstance = new WB(registers);
         return new PipeLine(ifPipReg, idPipReg, exPipReg, memPipReg, wbPipReg
-                ,IFinstance, IDinstance, EXinstance, MEMinstance, WBinstance);
+                , IFinstance, IDinstance, EXinstance, MEMinstance, WBinstance);
     }
 }

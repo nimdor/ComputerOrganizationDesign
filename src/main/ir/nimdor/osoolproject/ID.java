@@ -1,24 +1,22 @@
 package ir.nimdor.osoolproject;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 //Dorsa
 public class ID extends Component {
-    PipeReg prev , next;
-    Instruction instruction ;
-    int[] registerfile  ;
-    ArrayList<Integer> read_values  ;
+    PipeReg prev, next;
+    Instruction instruction;
+    int[] registerfile;
+    ArrayList<Integer> read_values;
 
-    public ID (int []  registerfile){
-        this.registerfile =  registerfile;
+    public ID(int[] registerfile) {
+        this.registerfile = registerfile;
 
     }
 
     @Override
-    public void run(PipeReg prev , PipeReg next ) {
+    public void run(PipeReg prev, PipeReg next) {
         read_values = new ArrayList<>();
 
         this.prev = prev;
@@ -30,9 +28,10 @@ public class ID extends Component {
         updatememory();
         updatecontrolvalues();
     }
+
     @Override
     public void printInfo() {
-        prev.instruction.print();
+        prev.getInstruction().print();
         System.out.println("ID information :");
         System.out.println("read values :");
         read_values.forEach(System.out::println);
@@ -54,6 +53,7 @@ public class ID extends Component {
         read_values.add(nonvar.getRt());
         read_values.add(nonvar.getRd());
     }
+
     private void updatecontrolvalues() {
 
         ControlVariables controlVariables = new ControlVariables();
@@ -103,7 +103,7 @@ public class ID extends Component {
 
     }
 
-    public boolean write ( int index , int data , boolean regdst ) {
+    public boolean write(int index, int data, boolean regdst) {
         if (regdst == false) return false;
         registerfile[index] = data;
         return true;

@@ -1,15 +1,14 @@
 package ir.nimdor.osoolproject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class PipeReg {
     private ControlVariables controlVariables = new ControlVariables();
     private NonControlVariables nonControlVariables = new NonControlVariables();
-    private Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{new Tag("stall", 0);}});
-    private boolean pc_control ;
+    private Instruction instruction = new Instruction("stall", new ArrayList<Tag>() {{
+        new Tag("stall", 0);
+    }});
+    private boolean pc_control;
     private int MEMcacheRD, EXcacheRD, MEMcacheRDval, EXcacheRDval;
 
     public int getMEMcacheRD() {
@@ -44,9 +43,6 @@ public class PipeReg {
         this.EXcacheRDval = EXcacheRDval;
     }
 
-    public void setPc_control(boolean pc_control) {
-        this.pc_control = pc_control;
-    }
     public ControlVariables getControlVariables() {
         return controlVariables;
     }
@@ -75,11 +71,15 @@ public class PipeReg {
         return pc_control;
     }
 
-    public void printInfo(){
+    public void setPc_control(boolean pc_control) {
+        this.pc_control = pc_control;
+    }
+
+    public void printInfo() {
 
         System.out.println("pipreg noncontrol variables :");
-        System.out.println("RS : "+ nonControlVariables.getRs());
-        System.out.println("RD : " + nonControlVariables.getRd() );
+        System.out.println("RS : " + nonControlVariables.getRs());
+        System.out.println("RD : " + nonControlVariables.getRd());
         System.out.println("RT : " + nonControlVariables.getRt());
 
 

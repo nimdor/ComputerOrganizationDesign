@@ -4,67 +4,61 @@ import java.util.ArrayList;
 
 // the instruction in binary format (?!) , saved separately
 public class Instruction {
-    int type
-            , op
-            , rs
-            , rt
-            , rd
-            , shamt
-            , funct,
+    int type, op, rs, rt, rd, shamt, funct,
 
-            offset ; // used for lw  sw beq
+    offset; // used for lw  sw beq
 
-    ArrayList<Tag> tags   ;
-    public Instruction ( String instruct , ArrayList<Tag> tgs  ) {
-        op = 0 ;
-        rs = 0 ;
-        rd = 0 ;
-        shamt = 0 ;
-        funct = 0 ;
+    ArrayList<Tag> tags;
 
-        offset = 0 ;
-        tags= tgs ;
+    public Instruction(String instruct, ArrayList<Tag> tgs) {
+        op = 0;
+        rs = 0;
+        rd = 0;
+        shamt = 0;
+        funct = 0;
+
+        offset = 0;
+        tags = tgs;
         setup(instruct);
     }
 
 
-    public void print () {
+    public void print() {
 
-        if (op == 0 ) {
-            System.out.println(bin (op , 6 ) + " " + bin ( rs ,5 ) + " " + bin (rt , 5 ) + " " + bin (rd ,5 )+ " " + bin( shamt , 5) + bin (funct , 6));
-        }
-        else  {
-            System.out.println(bin (op , 6 ) + " " + bin ( rs ,5 ) + " " + bin (rt , 5 ) + " "+ bin (offset , 16));
+        if (op == 0) {
+            System.out.println(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(rd, 5) + " " + bin(shamt, 5) + bin(funct, 6));
+        } else {
+            System.out.println(bin(op, 6) + " " + bin(rs, 5) + " " + bin(rt, 5) + " " + bin(offset, 16));
         }
 
     }
 
 
-    private String bin ( int num , int len )  {
+    private String bin(int num, int len) {
         String s = Integer.toBinaryString(num);
-        String zeroos = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" ;
-        String finalstring  =  zeroos.substring(0,len - s.length()) + s ;
+        String zeroos = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+        String finalstring = zeroos.substring(0, len - s.length()) + s;
         return finalstring;
 
     }
 
-    private void setup (String instruct) {
+    private void setup(String instruct) {
 
-        if (iscommand("add" , instruct)){
+        if (iscommand("add", instruct)) {
             op = 0;
-            funct = 32 ;
-            String subs = instruct.substring(3 + 1 );
+            funct = 32;
+            String subs = instruct.substring(3 + 1);
             String[] parts = subs.split(",");
             rd = getindex(parts[0]);
             rs = getindex(parts[1]);
             rt = getindex(parts[2]);
             return;
         }
-        if (iscommand("sub", instruct)){
-            op = 0 ;
-            funct =34 ;
+        if (iscommand("sub", instruct)) {
+            op = 0;
+            funct = 34;
 
-            String subs = instruct.substring(3 + 1 );
+            String subs = instruct.substring(3 + 1);
             String[] parts = subs.split(",");
             rd = getindex(parts[0]);
             rs = getindex(parts[1]);
@@ -72,43 +66,21 @@ public class Instruction {
 
             return;
         }
-        if (iscommand("and" , instruct)){
+        if (iscommand("and", instruct)) {
             funct = 36;
-            op = 0 ;
+            op = 0;
 
-            String subs = instruct.substring(3 + 1 );
+            String subs = instruct.substring(3 + 1);
             String[] parts = subs.split(",");
             rd = getindex(parts[0]);
             rs = getindex(parts[1]);
             rt = getindex(parts[2]);
-            return ;
+            return;
         }
-        if (iscommand("or", instruct)){
-            op = 0 ;
-            funct = 37 ;
-            String subs = instruct.substring(2 + 1 );
-            String[] parts = subs.split(",");
-            rd = getindex(parts[0]);
-            rs = getindex(parts[1]);
-            rt = getindex(parts[2]);
-
-            return ;
-        }
-        if (iscommand("nor", instruct)){
-            op = 0 ;
-            funct = 39;
-            String subs = instruct.substring(3 + 1 );
-            String[] parts = subs.split(",");
-
-            rd = getindex(parts[0]);
-            rs = getindex(parts[1]);
-            rt = getindex(parts[2]);
-            return ;
-        }
-        if(iscommand("slt", instruct)){
-            op = 0 ;
-            funct = 42 ;
-            String subs = instruct.substring(3 + 1 );
+        if (iscommand("or", instruct)) {
+            op = 0;
+            funct = 37;
+            String subs = instruct.substring(2 + 1);
             String[] parts = subs.split(",");
             rd = getindex(parts[0]);
             rs = getindex(parts[1]);
@@ -116,60 +88,82 @@ public class Instruction {
 
             return;
         }
-        if (iscommand("beq" , instruct)){//debug
-            op = 4 ;
+        if (iscommand("nor", instruct)) {
+            op = 0;
+            funct = 39;
+            String subs = instruct.substring(3 + 1);
+            String[] parts = subs.split(",");
 
-            String subs = instruct.substring(3 + 1 );
+            rd = getindex(parts[0]);
+            rs = getindex(parts[1]);
+            rt = getindex(parts[2]);
+            return;
+        }
+        if (iscommand("slt", instruct)) {
+            op = 0;
+            funct = 42;
+            String subs = instruct.substring(3 + 1);
+            String[] parts = subs.split(",");
+            rd = getindex(parts[0]);
+            rs = getindex(parts[1]);
+            rt = getindex(parts[2]);
+
+            return;
+        }
+        if (iscommand("beq", instruct)) {//debug
+            op = 4;
+
+            String subs = instruct.substring(3 + 1);
             String[] parts = subs.split(",");
 
             rs = getindex(parts[0]);
             rt = getindex(parts[1]);
 
-            for ( int i = 0 ;i < tags.size() ; i ++ ) {
+            for (int i = 0; i < tags.size(); i++) {
                 Tag tag = tags.get(i);
-                if ( tag.is_equal(parts[2])){
-                    offset = tag.getIndex() ;
-                    break ;
+                if (tag.is_equal(parts[2])) {
+                    offset = tag.getIndex();
+                    break;
                 }
             }
-            return ;
+            return;
         }
 
 
-
-        if (iscommand("lw" , instruct)){ // debug !!! in the end
-            op = 35 ;
-            String subs = instruct.substring(2 + 1 );
-            String[] parts = subs.split(",") ;
-            rt = getindex(parts[0]);
-            String[] second_parts = parts[1].split("\\(" ) ;
-            offset = Integer.parseInt(second_parts[0]) ;
-            rs = getindex(second_parts[1])  ;
-            return ;
-        }
-        if (iscommand("sw", instruct)){  // debug !!!!in the end
-            op = 43 ;
-
-            String subs = instruct.substring(2 + 1 );
+        if (iscommand("lw", instruct)) { // debug !!! in the end
+            op = 35;
+            String subs = instruct.substring(2 + 1);
             String[] parts = subs.split(",");
             rt = getindex(parts[0]);
-            String[] second_parts = parts[1].split("\\(" ) ;
-            offset = Integer.parseInt(second_parts[0]) ;
-            rs = getindex(second_parts[1])  ;
+            String[] second_parts = parts[1].split("\\(");
+            offset = Integer.parseInt(second_parts[0]);
+            rs = getindex(second_parts[1]);
+            return;
+        }
+        if (iscommand("sw", instruct)) {  // debug !!!!in the end
+            op = 43;
+
+            String subs = instruct.substring(2 + 1);
+            String[] parts = subs.split(",");
+            rt = getindex(parts[0]);
+            String[] second_parts = parts[1].split("\\(");
+            offset = Integer.parseInt(second_parts[0]);
+            rs = getindex(second_parts[1]);
             return;
 
         }
     }
-    private boolean iscommand(String command , String inst){
-        if ( command.length() > inst.length() ) return false ;
-       for ( int i = 0 ;i < (int) command.length() ; i ++ ) {
-           if (inst.charAt(i) != command.charAt(i) ) return false ;
-       }
-       return true ;
+
+    private boolean iscommand(String command, String inst) {
+        if (command.length() > inst.length()) return false;
+        for (int i = 0; i < (int) command.length(); i++) {
+            if (inst.charAt(i) != command.charAt(i)) return false;
+        }
+        return true;
 
     }
 
-    private int getindex ( String s ){ // (done)
+    private int getindex(String s) { // (done)
         String str = s.substring(1); // remove $ sign
         switch (str) {
 
@@ -237,9 +231,7 @@ public class Instruction {
         }
 
 
-
-
-        return 0 ;
+        return 0;
     }
 
     public int getType() {

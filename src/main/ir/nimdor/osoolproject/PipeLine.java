@@ -27,7 +27,7 @@ public class PipeLine {
         this.WBcomponent = WBcomponent;
     }
 
-    public boolean run(){
+    public boolean run() {
         try {
             System.err.println("ho");
             WBcomponent.run(MEMReg, WBReg);
@@ -42,7 +42,7 @@ public class PipeLine {
             MEMcomponent.printInfo();
             WBcomponent.printInfo();
             System.out.println("pipreg information : ");
-            System.out.println("IF/ID" );
+            System.out.println("IF/ID");
             IFReg.printInfo();
             System.out.println("ID/EX");
             IDReg.printInfo();
@@ -52,7 +52,7 @@ public class PipeLine {
             MEMReg.printInfo();
             System.out.println("-----------------------------------------------------");
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("WTF?");
             e.printStackTrace();
             return false;

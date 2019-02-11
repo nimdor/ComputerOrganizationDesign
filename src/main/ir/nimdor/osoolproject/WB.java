@@ -10,10 +10,10 @@ public class WB extends Component {
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
-        if (prev.getControlVariables().isMemToReg()){
+        if (prev.getControlVariables().isMemToReg()) {
             Commons.writeToReg(memory, prev.getInstruction().getRd(), prev.getNonControlVariables().getMEMResult(),
                     prev.getControlVariables().isRegWrite());
-        }else{
+        } else {
             Commons.writeToReg(memory, prev.getNonControlVariables().getRd(), prev.getNonControlVariables().getEXLogicalResult(),
                     prev.getControlVariables().isRegWrite());
         }
@@ -24,9 +24,9 @@ public class WB extends Component {
 
     }
 
-    public boolean write ( int index , int data , boolean regdst )  {
-        if ( regdst == false ) return false ;
-        memory[index] = data ;
-        return true ;
+    public boolean write(int index, int data, boolean regdst) {
+        if (regdst == false) return false;
+        memory[index] = data;
+        return true;
     }
 }
