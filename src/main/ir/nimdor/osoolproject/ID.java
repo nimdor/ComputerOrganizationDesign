@@ -54,7 +54,9 @@ public class ID extends Component {
 
     private void updatecontrolvalues(PipeReg prev , PipeReg next) {
 
-        ControlVariables controlVariables = prev.getControlVariables() ;
+        ControlVariables controlVariables = new ControlVariables();
+        controlVariables .setStall( prev.getControlVariables().isStall());
+
         // set controls based on opcode
         if (instruction.getOp() == Commands.Rtype.getValue()) {
             controlVariables.setAluOP(2);

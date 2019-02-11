@@ -42,6 +42,10 @@ public class IF extends Component {
         pc = get_value();
         //System.out.println("#pc value : " + pc);
         instruction_string = get_instruction(pc);
+        while (instruction_string.contains(":")){
+            pc ++ ;
+            instruction_string = get_instruction(pc);
+        }
         instruction = get_binary_insturction(instruction_string);
         //instruction.print();
 
