@@ -15,16 +15,16 @@ public class ID extends Component {
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
-
         read_values = new ArrayList<>();
         instruction = prev.getInstruction();
-        if (prev.getControlVariables().isStall())
+        if (prev.getControlVariables().isStall()) {
+            next.getControlVariables().setStall(true);
             return;
+        }
         next.setInstruction(instruction);
-        next.getNonControlVariables().setPc(prev.getNonControlVariables().getPc());
-
         updatememory(next);
         updatecontrolvalues(prev ,next);
+        next.getNonControlVariables().setPc(prev.getNonControlVariables().getPc());
     }
 
     @Override
@@ -53,10 +53,8 @@ public class ID extends Component {
     }
 
     private void updatecontrolvalues(PipeReg prev , PipeReg next) {
-
         ControlVariables controlVariables = new ControlVariables();
-        controlVariables .setStall( prev.getControlVariables().isStall());
-
+        controlVariables.setStall( prev.getControlVariables().isStall());
         // set controls based on opcode
         if (instruction.getOp() == Commands.Rtype.getValue()) {
             controlVariables.setAluOP(2);

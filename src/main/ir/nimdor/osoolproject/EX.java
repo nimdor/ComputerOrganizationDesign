@@ -49,9 +49,9 @@ public class EX extends Component {
         } else if (prev.getControlVariables().getAluOP() == 0) {
             ALUout = ALUinp1 + ALUinp2;
         } else if (prev.getControlVariables().getAluOP() == 1) {
-            if (prev.getInstruction().funct == Commands.beq.getValue()) {
+//            if (prev.getInstruction().funct == Commands.beq.getValue()) {
                 ALUzero = (ALUinp1 - ALUinp2 == 0);
-            }
+//            }
         }
         next.getNonControlVariables().setEXLogicalResult(ALUout);
         next.getNonControlVariables().setEXZeroResult(ALUzero);

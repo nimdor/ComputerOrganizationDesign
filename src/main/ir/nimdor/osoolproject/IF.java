@@ -34,6 +34,7 @@ public class IF extends Component {
     public void run(PipeReg prev, PipeReg next) {
         this.prev = prev;
         this.next = next;
+        next.getControlVariables().setStall(false);
         if (stall_condition) {
             handle();
             return;
@@ -79,8 +80,9 @@ public class IF extends Component {
         }
         stall--;
         next.getControlVariables().setStall(true);
-        if (stall == 0)
+        if (stall == 0) {
             stall_condition = false;
+        }
         return;
     }
 
