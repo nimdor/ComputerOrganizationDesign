@@ -5,6 +5,7 @@ public class EX extends Component {
     private boolean ALUzero;
     private int[] registers;
     private Instruction instruction;
+    private int oldpc, newpc;
 
     public EX(int[] registers) {
         this.registers = registers;
@@ -13,6 +14,8 @@ public class EX extends Component {
     @Override
     public void run(PipeReg prev, PipeReg next) {
         Commons.forwardPipeReg(prev, next);
+        oldpc = prev.getNonControlVariables().getPc();
+        newpc = prev.getInstruction().getOffset();
         instruction = prev.getInstruction();
         if (next.getMEMcacheRD() != -1) {
             registers[next.getMEMcacheRD()] = next.getMEMcacheRDval();
@@ -61,6 +64,7 @@ public class EX extends Component {
     public void printInfo() {
         System.out.print("EX information: ");
         instruction.print();
-        System.out.println("Main ALU: input:" + ALUinp1 + " " + ALUinp2 + " output: " + ALUout + " zero: " + ALUzero);
+        System.out.print("Main ALU: input:" + ALUinp1 + " " + ALUinp2 + " output: " + ALUout + " zero: " + ALUzero);
+        System.out.println(" Secondary outs: " + oldpc + " " + newpc);
     }
 }

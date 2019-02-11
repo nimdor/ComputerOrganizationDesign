@@ -1,8 +1,8 @@
 package ir.nimdor.osoolproject;
 
 public class MEM extends Component {
-    int[] memory;
-    Instruction instruction;
+    private int[] memory;
+    private Instruction instruction;
     private int lastRead;
 
     public MEM(int[] memory) {
