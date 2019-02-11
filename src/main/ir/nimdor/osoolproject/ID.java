@@ -8,13 +8,14 @@ public class ID extends Component {
     private Instruction instruction;
     private int[] registerfile;
     private ArrayList<Integer> read_values;
-
+    PipeReg prev , next ;
     public ID(int[] registerfile) {
         this.registerfile = registerfile;
     }
 
     @Override
     public void run(PipeReg prev, PipeReg next) {
+
         read_values = new ArrayList<>();
         instruction = prev.getInstruction();
         if (prev.getControlVariables().isStall())
@@ -23,7 +24,7 @@ public class ID extends Component {
         next.getNonControlVariables().setPc(prev.getNonControlVariables().getPc());
 
         updatememory(next);
-        updatecontrolvalues(next);
+        updatecontrolvalues(prev ,next);
     }
 
     @Override
@@ -51,9 +52,9 @@ public class ID extends Component {
         next.setNonControlVariables(nonvar);
     }
 
-    private void updatecontrolvalues(PipeReg next) {
+    private void updatecontrolvalues(PipeReg prev , PipeReg next) {
 
-        ControlVariables controlVariables = new ControlVariables();
+        ControlVariables controlVariables = prev.getControlVariables() ;
         // set controls based on opcode
         if (instruction.getOp() == Commands.Rtype.getValue()) {
             controlVariables.setAluOP(2);

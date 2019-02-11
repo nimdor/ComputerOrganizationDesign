@@ -34,7 +34,6 @@ public class IF extends Component {
     public void run(PipeReg prev, PipeReg next) {
         this.prev = prev;
         this.next = next;
-
         if (stall_condition) {
             handle();
             return;
@@ -56,10 +55,12 @@ public class IF extends Component {
         next.setInstruction(instruction);
         pc += 1;
         next.getNonControlVariables().setPc(pc);
+        System.out.println("NO STALL " + next.getControlVariables().isStall());
 
     }
 
     void set_stall_condition() {
+
         stall_condition = true;
         stall = 3;
     }
@@ -145,6 +146,7 @@ public class IF extends Component {
         try {
             line = Files.readAllLines(Paths.get("file.txt")).get(pcc);
         } catch (Exception e) {
+            System.out.println("EXCEPT CONDITION HAPPENED ! ");
             stall_condition = true ;
             stall = 10;
 
