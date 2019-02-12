@@ -18,7 +18,8 @@ public class IF extends Component {
     ArrayList<Tag> tags;
     int stall = 0;
     boolean stall_condition;
-
+    Instruction cache_instruction ;
+    boolean pc_controll = false;
     public IF() {
         tags = new ArrayList<>();
         pc = 0;
@@ -57,6 +58,14 @@ public class IF extends Component {
             return;
 
         }
+        if (cache_instruction.getOp() == 35 && instruction.getOp() != 35) {
+                if ( cache_instruction.getRt() == instruction.getRt() || cache_instruction.getRt() == instruction.getRs()){
+                    stall_condition = true ;
+                    stall = 1 ;
+                    run (prev,next) ;
+                    return ;
+                }
+        }
         next.setInstruction(instruction);
         pc += 1;
         next.getNonControlVariables().setPc(pc);
@@ -93,7 +102,8 @@ public class IF extends Component {
 //        System.out.println("Instruction : ");
         //TODO
 //        System.out.println("Clock : " + (pc * 4) + 16);    // starting pc or ending pc ?
-        System.out.print("PC: " + ((pc * 4)+8));    // starting pc or ending pc ?
+        System.out.print("PC: " + ((pc * 4)+16));    // starting pc or ending pc ?
+        System.out.println("PCsrc : " + pc_controll);
     }
 
     private void create_list() {
@@ -140,8 +150,11 @@ public class IF extends Component {
 
     // decide the value of pc --> MUX    ----> from prev
     public int get_value() {
+        pc_controll = prev.isPc_control();
+
         if (prev.isPc_control())
             pc = prev.getNonControlVariables().getPc();
+
 
         return pc;
     }
