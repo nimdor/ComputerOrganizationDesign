@@ -31,10 +31,9 @@ public class ID extends Component {
     public void printInfo() {
         System.out.print("ID information: ");
         instruction.print();
-        System.out.print("read values:");
+        System.out.print("read values: ");
         read_values.forEach((n) -> System.out.print(" " + n));
-        System.out.println();
-        System.out.print("$t0 - $t4 : ");
+        System.out.print("   $t0 - $t4 : ");
         System.out.print(registerfile[8] + " " + registerfile[9] + " " + registerfile[10] + " " +
                 registerfile[11] + " " + registerfile[12]);
         System.out.print("  ra :" + registerfile[31]);

@@ -48,7 +48,7 @@ public class PipeLine {
             IDcomponent.run(IFReg, IDReg);
             IFcomponent.run(MEMReg, IFReg);
             IFcomponent.printInfo();
-            System.out.println("clock: " + clock);
+            System.out.println(" clock: " + clock);
 //            System.out.println("IF/ID");
             IFReg.printInfo();
 
