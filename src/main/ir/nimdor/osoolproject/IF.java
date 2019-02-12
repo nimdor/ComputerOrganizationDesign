@@ -66,6 +66,7 @@ public class IF extends Component {
 //        System.out.println((cache_instruction == null)?"null":"object" +  cache_instruction.getOp() + " " + instruction.getOp() );
         if (cache_instruction != null && cache_instruction.getOp() == 35 && instruction.getOp() != 35) {
                 if ( cache_instruction.getRt() == instruction.getRt() || cache_instruction.getRt() == instruction.getRs()){
+                    pending_instruction = instruction;
                     stall_condition = 2;
                     stall = 1 ;
                     run (prev,next) ;
@@ -94,7 +95,7 @@ public class IF extends Component {
             stall--;
             return;
         }
-        cache_instruction = null ;
+        cache_instruction = null;
         next.getControlVariables().setStall(true);
         next.setInstruction(new Instruction("stall", next.getInstruction().getTags()));
         stall--;
