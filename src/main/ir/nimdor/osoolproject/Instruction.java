@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 // the instruction in binary format (?!) , saved separately
 public class Instruction {
-    int type, op, rs, rt, rd, shamt, funct,
+    private int type, op, rs, rt, rd, shamt, funct,
             offset; // used for lw  sw beq
-    String instruct;
+    private String instruct;
 
-    ArrayList<Tag> tags;
+    private ArrayList<Tag> tags;
 
     public Instruction(String instruct, ArrayList<Tag> tgs) {
         op = 0;
@@ -298,5 +298,13 @@ public class Instruction {
 
     public void setTags(ArrayList<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getInstruct() {
+        return instruct;
+    }
+
+    public void setInstruct(String instruct) {
+        this.instruct = instruct;
     }
 }

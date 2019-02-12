@@ -17,7 +17,7 @@ public class IF extends Component {
     Instruction instruction, pending_instruction;
     ArrayList<Tag> tags;
     int stall = 0;
-    boolean stall_condition;
+    int stall_condition;
     Instruction cache_instruction ;
     boolean pc_controll = false;
     public IF() {
@@ -26,7 +26,7 @@ public class IF extends Component {
         prev = null;
         next = null;
         pending_instruction = null;
-        stall_condition = false;
+        stall_condition = 0;
         create_list();   // makes the tags to read ! for beq
     }
 
@@ -36,8 +36,13 @@ public class IF extends Component {
         this.prev = prev;
         this.next = next;
         next.getControlVariables().setStall(false);
-        if (stall_condition) {
+        if (stall_condition == 1) {
             handle();
+            instruction = next.getInstruction();
+            return;
+        }else if(stall_condition == 2){
+            handleLW();
+            instruction = next.getInstruction();
             return;
         }
 
@@ -58,11 +63,12 @@ public class IF extends Component {
             return;
 
         }
-        System.out.println((cache_instruction == null)?"null":"object" +  cache_instruction.getOp() + " " + instruction.getOp() );
+//        System.out.println((cache_instruction == null)?"null":"object" +  cache_instruction.getOp() + " " + instruction.getOp() );
         if (cache_instruction != null && cache_instruction.getOp() == 35 && instruction.getOp() != 35) {
 
                 if ( cache_instruction.getRt() == instruction.getRt() || cache_instruction.getRt() == instruction.getRs()){
-                    stall_condition = true ;
+                    pending_instruction = instruction;
+                    stall_condition = 2;
                     stall = 1 ;
                     run (prev,next) ;
                     return ;
@@ -71,15 +77,35 @@ public class IF extends Component {
         next.setInstruction(instruction);
         pc += 1;
         next.getNonControlVariables().setPc(pc);
-        System.out.println("NO STALL " + next.getControlVariables().isStall());
+//        System.out.println("NO STALL " + next.getControlVariables().isStall());
         cache_instruction = instruction;
     }
 
     void set_stall_condition() {
 
-        stall_condition = true;
+        stall_condition = 1;
         stall = 4;
     }
+
+    void handleLW() {
+        if (stall == 1) {
+            next.setInstruction(pending_instruction);
+            cache_instruction = pending_instruction ;
+            pc += 1;
+            next.getNonControlVariables().setPc(pc);
+            stall--;
+            return;
+        }
+        cache_instruction = null;
+        next.getControlVariables().setStall(true);
+        next.setInstruction(new Instruction("stall", next.getInstruction().getTags()));
+        stall--;
+        if (stall == 0) {
+            stall_condition = 0;
+        }
+        return;
+    }
+
 
     void handle() {
         if (stall == 4) {
@@ -92,9 +118,10 @@ public class IF extends Component {
         }
         cache_instruction = null ;
         next.getControlVariables().setStall(true);
+        next.setInstruction(new Instruction("stall", next.getInstruction().getTags()));
         stall--;
         if (stall == 0) {
-            stall_condition = false;
+            stall_condition = 0;
         }
         return;
     }
@@ -170,7 +197,7 @@ public class IF extends Component {
             line = Files.readAllLines(Paths.get("file.txt")).get(pcc);
         } catch (Exception e) {
             System.out.println("EXCEPT CONDITION HAPPENED ! ");
-            stall_condition = true ;
+            stall_condition = 1 ;
             stall = 100;
             run(prev,next);
 

@@ -31,17 +31,17 @@ public class EX extends Component {
             ALUinp2 = registers[prev.getInstruction().getRt()];
         }
         if (prev.getControlVariables().getAluOP() == 2) {
-            if (prev.getInstruction().funct == Commands.add.getValue()) {
+            if (prev.getInstruction().getFunct() == Commands.add.getValue()) {
                 ALUout = ALUinp1 + ALUinp2;
-            } else if (prev.getInstruction().funct == Commands.sub.getValue()) {
+            } else if (prev.getInstruction().getFunct() == Commands.sub.getValue()) {
                 ALUout = ALUinp1 - ALUinp2;
-            } else if (prev.getInstruction().funct == Commands.and.getValue()) {
+            } else if (prev.getInstruction().getFunct() == Commands.and.getValue()) {
                 ALUout = ALUinp1 & ALUinp2;
-            } else if (prev.getInstruction().funct == Commands.or.getValue()) {
+            } else if (prev.getInstruction().getFunct() == Commands.or.getValue()) {
                 ALUout = ALUinp1 | ALUinp2;
-            } else if (prev.getInstruction().funct == Commands.nor.getValue()) {
+            } else if (prev.getInstruction().getFunct() == Commands.nor.getValue()) {
                 ALUout = ~(ALUinp1 | ALUinp2);
-            } else if (prev.getInstruction().funct == Commands.slt.getValue()) {
+            } else if (prev.getInstruction().getFunct() == Commands.slt.getValue()) {
                 if (ALUinp1 < ALUinp2) {
                     ALUout = 1;
                 } else {
