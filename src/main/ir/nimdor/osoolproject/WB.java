@@ -12,6 +12,8 @@ public class WB extends Component {
     @Override
     public void run(PipeReg prev, PipeReg next) {
         instruction = prev.getInstruction();
+        next.setPc_control(prev.isPc_control());
+        next.getNonControlVariables().setPc(prev.getNonControlVariables().getPc());
         if (prev.getControlVariables().isStall())
             return;
         if (prev.getControlVariables().isMemToReg()) {

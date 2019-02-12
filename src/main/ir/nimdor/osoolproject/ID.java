@@ -17,6 +17,7 @@ public class ID extends Component {
     public void run(PipeReg prev, PipeReg next) {
         read_values = new ArrayList<>();
         instruction = prev.getInstruction();
+        next.setControlVariables(new ControlVariables());
         next.setInstruction(instruction);
         if (prev.getControlVariables().isStall()) {
             next.getControlVariables().setStall(true);

@@ -191,7 +191,7 @@ public class IF extends Component {
         pc_controll = prev.isPc_control();
 
         if (prev.isPc_control())
-            pc = prev.getNonControlVariables().getPc();
+            pc = prev.getNonControlVariables().getPc() + 1 ;
 
 
         return pc;
