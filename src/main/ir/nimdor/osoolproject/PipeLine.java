@@ -32,6 +32,7 @@ public class PipeLine {
         try {
 //            System.err.println("ho");
             clock++;
+            System.out.println(IFReg.getControlVariables());
             WBcomponent.run(MEMReg, WBReg);
             MEMcomponent.run(EXReg, MEMReg);
             EXcomponent.run(IDReg, EXReg);
