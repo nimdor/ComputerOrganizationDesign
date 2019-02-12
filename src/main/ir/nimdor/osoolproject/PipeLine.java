@@ -12,6 +12,7 @@ public class PipeLine {
     private EX EXcomponent;
     private MEM MEMcomponent;
     private WB WBcomponent;
+    private int clock = 0;
 
     public PipeLine(PipeReg IFReg, PipeReg IDReg, PipeReg EXReg, PipeReg MEMReg, PipeReg WBReg,
                     IF IFcomponent, ID IDcomponent, EX EXcomponent, MEM MEMcomponent, WB WBcomponent) {
@@ -30,6 +31,7 @@ public class PipeLine {
     public boolean run() {
         try {
 //            System.err.println("ho");
+            clock++;
             WBcomponent.run(MEMReg, WBReg);
             MEMcomponent.run(EXReg, MEMReg);
             EXcomponent.run(IDReg, EXReg);
@@ -37,6 +39,7 @@ public class PipeLine {
             IFcomponent.run(MEMReg, IFReg);
             System.out.println("------------------------PROGRAM DATA -----------------------------");
             IFcomponent.printInfo();
+            System.out.println("clock: " + clock);
 //            System.out.println("IF/ID");
             IFReg.printInfo();
 

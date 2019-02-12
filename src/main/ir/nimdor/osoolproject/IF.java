@@ -93,7 +93,7 @@ public class IF extends Component {
 //        System.out.println("Instruction : ");
         //TODO
 //        System.out.println("Clock : " + (pc * 4) + 16);    // starting pc or ending pc ?
-        System.out.println("PC: " + ((pc * 4)+16) + "clock: " + pc);    // starting pc or ending pc ?
+        System.out.print("PC: " + ((pc * 4)+16));    // starting pc or ending pc ?
     }
 
     private void create_list() {
