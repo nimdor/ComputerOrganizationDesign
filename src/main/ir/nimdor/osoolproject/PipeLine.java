@@ -32,7 +32,8 @@ public class PipeLine {
         try {
 //            System.err.println("ho");
             clock++;
-            System.out.print(" branch:" + EXReg.getControlVariables().isBranch());
+            System.out.println("------------------------PROGRAM DATA -----------------------------");
+            System.out.print("branch:" + EXReg.getControlVariables().isBranch());
             System.out.print(" memRead:" + EXReg.getControlVariables().isMemRead());
             System.out.print(" memToReg:" + MEMReg.getControlVariables().isMemToReg());
             System.out.print(" memWrite:" + EXReg.getControlVariables().isMemWrite());
@@ -46,7 +47,6 @@ public class PipeLine {
             EXcomponent.run(IDReg, EXReg);
             IDcomponent.run(IFReg, IDReg);
             IFcomponent.run(MEMReg, IFReg);
-            System.out.println("------------------------PROGRAM DATA -----------------------------");
             IFcomponent.printInfo();
             System.out.println("clock: " + clock);
 //            System.out.println("IF/ID");

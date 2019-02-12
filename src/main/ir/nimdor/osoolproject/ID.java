@@ -17,11 +17,11 @@ public class ID extends Component {
     public void run(PipeReg prev, PipeReg next) {
         read_values = new ArrayList<>();
         instruction = prev.getInstruction();
+        next.setInstruction(instruction);
         if (prev.getControlVariables().isStall()) {
             next.getControlVariables().setStall(true);
             return;
         }
-        next.setInstruction(instruction);
         updatememory(next);
         updatecontrolvalues(prev ,next);
         next.getNonControlVariables().setPc(prev.getNonControlVariables().getPc());
