@@ -38,11 +38,11 @@ public class IF extends Component {
         next.getControlVariables().setStall(false);
         if (stall_condition == 1) {
             handle();
-            instruction = next.getInstruction();
+          //  instruction = next.getInstruction();
             return;
         }else if(stall_condition == 2){
             handleLW();
-            instruction = next.getInstruction();
+           // instruction = next.getInstruction();
             return;
         }
 
@@ -58,7 +58,7 @@ public class IF extends Component {
 
         if (instruction.getOp() == 4) {
             set_stall_condition();
-            pending_instruction = instruction;
+            pending_instruction = get_binary_insturction(instruction_string);
             run(prev, next);
             return;
 
@@ -67,7 +67,7 @@ public class IF extends Component {
         if (cache_instruction != null && cache_instruction.getOp() == 35 && instruction.getOp() != 35) {
 
                 if ( cache_instruction.getRt() == instruction.getRt() || cache_instruction.getRt() == instruction.getRs()){
-                    pending_instruction = instruction;
+                    pending_instruction =get_binary_insturction(instruction_string);
                     stall_condition = 2;
                     stall = 1 ;
                     run (prev,next) ;
@@ -87,23 +87,26 @@ public class IF extends Component {
         stall = 4;
     }
 
-    void handleLW() {
-        if (stall == 1) {
+    public void handleLW(){
+        if (stall == 0){
+
             next.setInstruction(pending_instruction);
-            cache_instruction = pending_instruction ;
-            pc += 1;
+            cache_instruction = pending_instruction;
+            pc += 1 ;
+            stall_condition = 0 ;
+            instruction = next.getInstruction() ;
+
             next.getNonControlVariables().setPc(pc);
-            stall--;
-            return;
+            next.getControlVariables().setStall(false);
+            return ;
         }
-        cache_instruction = null;
+
+        cache_instruction = null ;
+
         next.getControlVariables().setStall(true);
         next.setInstruction(new Instruction("stall", next.getInstruction().getTags()));
-        stall--;
-        if (stall == 0) {
-            stall_condition = 0;
-        }
-        return;
+        instruction= next.getInstruction();
+        stall -- ;
     }
 
 
@@ -111,6 +114,8 @@ public class IF extends Component {
         if (stall == 4) {
             next.setInstruction(pending_instruction);
             cache_instruction = pending_instruction ;
+            instruction = next.getInstruction() ;
+
             pc += 1;
             next.getNonControlVariables().setPc(pc);
             stall--;
@@ -119,6 +124,8 @@ public class IF extends Component {
         cache_instruction = null ;
         next.getControlVariables().setStall(true);
         next.setInstruction(new Instruction("stall", next.getInstruction().getTags()));
+        instruction = next.getInstruction() ;
+
         stall--;
         if (stall == 0) {
             stall_condition = 0;
