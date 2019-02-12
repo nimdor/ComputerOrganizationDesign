@@ -32,7 +32,15 @@ public class PipeLine {
         try {
 //            System.err.println("ho");
             clock++;
-            System.out.println(IFReg.getControlVariables());
+            System.out.print(" branch:" + EXReg.getControlVariables().isBranch());
+            System.out.print(" memRead:" + EXReg.getControlVariables().isMemRead());
+            System.out.print(" memToReg:" + MEMReg.getControlVariables().isMemToReg());
+            System.out.print(" memWrite:" + EXReg.getControlVariables().isMemWrite());
+            System.out.print(" aluSrc:" + IDReg.getControlVariables().isAluSrc());
+            System.out.print(" regWrite:" + WBReg.getControlVariables().isRegWrite());
+            System.out.print(" aluOP:" + IDReg.getControlVariables().getAluOP());
+            System.out.println();
+
             WBcomponent.run(MEMReg, WBReg);
             MEMcomponent.run(EXReg, MEMReg);
             EXcomponent.run(IDReg, EXReg);
