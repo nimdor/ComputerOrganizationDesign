@@ -60,6 +60,7 @@ public class IF extends Component {
         }
         System.out.println((cache_instruction == null)?"null":"object" +  cache_instruction.getOp() + " " + instruction.getOp() );
         if (cache_instruction != null && cache_instruction.getOp() == 35 && instruction.getOp() != 35) {
+
                 if ( cache_instruction.getRt() == instruction.getRt() || cache_instruction.getRt() == instruction.getRs()){
                     stall_condition = true ;
                     stall = 1 ;
